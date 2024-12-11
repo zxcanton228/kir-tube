@@ -1,0 +1,11 @@
+import { useQuery } from '@tanstack/react-query'
+import { userService } from 'src/services/user.service'
+
+export function useProfile() {
+	const { data, isLoading, isFetching, isPending, isRefetching } = useQuery({
+		queryKey: ['profile'],
+		queryFn: () => userService.getProfile(),
+		refetchInterval: 1800000 // 30 minutes
+	})
+	return { profile: data?.data, isLoading: isFetching || isPending || isRefetching || isLoading }
+}

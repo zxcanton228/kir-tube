@@ -1,26 +1,30 @@
 import type { Metadata } from 'next'
 import { Noto_Sans } from 'next/font/google'
+import type { ReactNode } from 'react'
 
-import { Layout } from 'src/components/layout/Layout'
+import { Providers } from 'src/providers/Providers'
 
 import './globals.scss'
 
 const notoSans = Noto_Sans({ subsets: ['latin'] })
 
 export const metadata: Metadata = {
-	title: 'KIR Video',
-	description: 'The best Videohosting'
+	title: {
+		absolute: 'KIR Video',
+		template: `%s | KIR Video`
+	},
+	description: 'The best Video hosting'
 }
 
 export default function RootLayout({
 	children
 }: Readonly<{
-	children: React.ReactNode
+	children: ReactNode
 }>) {
 	return (
 		<html lang='en'>
 			<body className={`${notoSans.className} antialiased`}>
-				<Layout>{children}</Layout>
+				<Providers>{children}</Providers>
 			</body>
 		</html>
 	)

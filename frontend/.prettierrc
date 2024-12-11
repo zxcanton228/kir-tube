@@ -7,7 +7,7 @@
 	"jsxSingleQuote": true,
 	"arrowParens": "avoid",
 	"singleAttributePerLine": true,
-	"printWidth": 100,
+	"printWidth": 125,
 	"proseWrap": "always",
 	"bracketSpacing": true,
 	"importOrder": [

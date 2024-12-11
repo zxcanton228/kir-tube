@@ -1,9 +1,6 @@
-import { Menu, SquarePlay } from 'lucide-react'
-import Link from 'next/link'
+import { Menu } from 'lucide-react'
 
-import { COLORS } from 'src/constants/colors.constants'
-
-import { PUBLIC_PAGE } from 'src/config/public-page.config'
+import { Logo } from './Logo'
 
 export const SidebarHeader = ({ toggleSidebar }: { toggleSidebar: () => void }) => (
 	<div className='flex items-center gap-5 mb-12'>
@@ -13,15 +10,6 @@ export const SidebarHeader = ({ toggleSidebar }: { toggleSidebar: () => void }) 
 		>
 			<Menu />
 		</button>
-		<Link
-			href={PUBLIC_PAGE.HOME}
-			className='flex items-center gap-1.5'
-		>
-			<SquarePlay
-				color={COLORS.primary}
-				size={29}
-			/>
-			<span className='font-medium text-xl'>KIR Video</span>
-		</Link>
+		<Logo />
 	</div>
 )
