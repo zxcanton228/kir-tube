@@ -1,13 +1,15 @@
 import * as m from 'framer-motion/m'
-import { BadgeCheck, type LucideIcon } from 'lucide-react'
+import { type LucideIcon } from 'lucide-react'
 import Image from 'next/image'
 import Link from 'next/link'
 import type { IVideo } from 'src/types/video.types'
 
 import { PAGE } from 'src/config/public-page.config'
 
+import { transformCount } from 'src/utils/transform-count'
 import { transformDate } from 'src/utils/transform-date'
-import { transformViews } from 'src/utils/transform-views'
+
+import { VerifiedBadge } from 'ui/VerifiedBadge'
 
 interface Props {
 	video: IVideo
@@ -21,13 +23,13 @@ export const VideoItem = ({ video, Icon }: Props) => {
 			transition={{ types: 'spring', stiffness: 500, damping: 30 }}
 		>
 			<div className='relative mb-1.5'>
-				<Link href={PAGE.VIDEO(video.id)}>
+				<Link href={PAGE.VIDEO(video.publicId)}>
 					<Image
 						src={video.thumbnailUrl}
 						alt={video.title}
 						width={250}
 						height={140}
-						quality={65}
+						quality={70}
 						className='rounded-md'
 					/>
 				</Link>
@@ -53,7 +55,7 @@ export const VideoItem = ({ video, Icon }: Props) => {
 							size={20}
 						/>
 					)}
-					<span className='text-gray-400 text-sm'>{transformViews(video.viewsCount)}</span>
+					<span className='text-gray-400 text-sm'>{transformCount(video.viewsCount)} views</span>
 				</div>
 				<div>
 					<span className='text-gray-400 text-xs'>{transformDate(video.createdAt)}</span>
@@ -73,14 +75,7 @@ export const VideoItem = ({ video, Icon }: Props) => {
 					className='flex items-center gap-1'
 				>
 					<span className='text-gray-400 text-sm'>{video.channel.user.name}</span>
-					{video.channel.isVerified && (
-						<span>
-							<BadgeCheck
-								className='text-green-500'
-								size={15}
-							/>
-						</span>
-					)}
+					{video.channel.isVerified && <VerifiedBadge />}
 				</Link>
 			</div>
 		</m.article>

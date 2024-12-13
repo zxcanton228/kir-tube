@@ -1,12 +1,24 @@
 import { useMutation } from '@tanstack/react-query'
 import { LogOut } from 'lucide-react'
+import { usePathname, useRouter } from 'next/navigation'
 import { authService } from 'src/services/auth.service'
 import { useTypedSelector } from 'src/store'
 
+import { PAGE } from 'src/config/public-page.config'
+import { STUDIO_PAGE } from 'src/config/studio-page.config'
+
 export function Logout() {
+	const router = useRouter()
+	const pathname = usePathname()
+
 	const { mutate, isPending } = useMutation({
 		mutationKey: ['logout'],
-		mutationFn: () => authService.logout()
+		mutationFn: () => authService.logout(),
+		onSuccess: () => {
+			if (pathname.includes(STUDIO_PAGE.HOME) || pathname.includes(STUDIO_PAGE.SETTINGS)) {
+				router.push(PAGE.HOME)
+			}
+		}
 	})
 
 	const { isLoggedIn } = useTypedSelector(state => state.auth)

@@ -1,14 +1,19 @@
+import cn from 'clsx'
 import type { ButtonHTMLAttributes, ReactNode } from 'react'
 
 interface Props extends ButtonHTMLAttributes<HTMLButtonElement> {
-	children: ReactNode
 	isLoading?: boolean
+	children: ReactNode
+	variant?: 'secondary' | 'primary'
 }
 
-export function Button({ children, isLoading, ...props }: Props) {
+export function Button({ children, variant = 'primary', isLoading, ...props }: Props) {
 	return (
 		<button
-			className='py-2 px-10 bg-primary text-white font-semibold rounded hover:bg-red-400 transition-color disabled:bg-gray-400'
+			className={cn('py-2 px-10 font-semibold rounded transition-colors disabled:bg-gray-400', {
+				'bg-primary text-white hover:bg-red-400': variant === 'primary',
+				'bg-gray-600 text-white hover:bg-gray-500': variant === 'secondary'
+			})}
 			disabled={isLoading || props.disabled}
 			{...props}
 		>

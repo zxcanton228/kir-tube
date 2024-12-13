@@ -1,4 +1,4 @@
-import type { IUser } from './video.types'
+import type { IUser, IVideo } from './video.types'
 
 export interface IChannel {
 	id: string
@@ -11,4 +11,6 @@ export interface IChannel {
 	createdAt: Date
 	updatedAt: Date
 	user: IUser
+	videos: IVideo[]
+	subscribers: IUser[]
 }

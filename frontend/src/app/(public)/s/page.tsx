@@ -1,14 +1,26 @@
-import type { Metadata } from 'next'
+'use client'
 
-import { NO_INDEX_PAGE } from 'src/constants/seo.constants'
+import dynamic from 'next/dynamic'
 
-import { SearchPage } from './SearchPage'
+import { SkeletonLoader } from 'ui/SkeletonLoader'
 
-export const metadata: Metadata = {
-	title: 'Search',
-	...NO_INDEX_PAGE
-}
+const DynamicSearchPage = dynamic(() => import('./SearchPage').then(mod => mod.SearchPage), {
+	ssr: false,
+	loading: () => (
+		<div className='grid grid-cols-6 gap-6'>
+			<SkeletonLoader
+				count={6}
+				className='h-36 rounded-md'
+			/>
+		</div>
+	)
+})
 
-export default function Page() {
-	return <SearchPage />
+// export const metadata: Metadata = {
+// 	title: 'Search',
+// 	...NO_INDEX_PAGE
+// }
+
+export default function SPage() {
+	return <DynamicSearchPage />
 }
