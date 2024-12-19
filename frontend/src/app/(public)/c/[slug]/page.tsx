@@ -4,7 +4,7 @@ import channelService from 'src/services/channel.service'
 
 import { SubscribeButton } from 'src/components/SubscribeButton'
 
-import { CLIENT_URL } from 'src/constants/constants'
+import { SITE_URL } from 'src/constants/constants'
 
 import { transformCount } from 'src/utils/transform-count'
 
@@ -39,7 +39,7 @@ export async function generateMetadata({ params }: any): Promise<Metadata> {
 			title: channel.user.name,
 			description: channel.description,
 			images: [channel.avatarUrl],
-			url: `${CLIENT_URL}/channels/${channel.slug}`
+			url: `${SITE_URL}/c/${channel.slug}`
 		}
 	}
 }
@@ -64,7 +64,7 @@ export default async function ChannelPage({ params }: any) {
 						alt={channel.user.name || ''}
 						src={channel.bannerUrl}
 						layout='fill'
-						objectFit='cover'
+						style={{ objectFit: 'cover' }}
 						quality={100}
 						priority
 					/>

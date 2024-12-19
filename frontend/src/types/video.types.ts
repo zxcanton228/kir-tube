@@ -1,12 +1,7 @@
-import type { IChannel } from './channel.types'
+import type { EnumVideoPlayerQuality } from 'ui/video-player/video-player.types'
 
-export interface IMain<T = IVideo> {
-	videos: T[]
-	page: number
-	limit: number
-	totalCount: number
-	totalPages: number
-}
+import type { IChannel } from './channel.types'
+import type { IPagination } from './pagination.types'
 
 export interface IVideo {
 	id: string
@@ -15,7 +10,7 @@ export interface IVideo {
 	description: string
 	thumbnailUrl: string
 	videoFileName: string
-	maxResolution: IMaxResolution
+	maxResolution: EnumVideoPlayerQuality
 	viewsCount: number
 	isPublic: boolean
 	channelId: string
@@ -23,6 +18,12 @@ export interface IVideo {
 	updatedAt: Date
 	channel: IChannel
 	tags: ITag[]
+}
+export interface IFullVideo extends IVideo {
+	likes: []
+}
+export interface ISingleVideoResponse extends IFullVideo {
+	similarVideos: IVideo[]
 }
 
 export interface IUser {
@@ -35,13 +36,8 @@ export interface IUser {
 	updatedAt: Date
 }
 
-export enum IMaxResolution {
-	'4K' = '4K',
-	'2K' = '2K',
-	'1080p' = '1080p',
-	'720p' = '720p',
-	'480p' = '480p',
-	'360p' = '360p'
+export interface IVideosPagination extends IPagination {
+	videos: IVideo[]
 }
 
 export interface ITag {

@@ -11,7 +11,7 @@ import { errorCatch } from './api.helper'
 const options: CreateAxiosDefaults = {
 	baseURL: API_URL,
 	headers: {
-		// 'Content-Type': 'application/json'
+		'Content-Type': 'application/json'
 	},
 	withCredentials: true
 }

@@ -27,6 +27,7 @@ export function Logout() {
 
 	return (
 		<button
+			title='Logout'
 			onClick={() => mutate()}
 			className={'group py-3 flex items-center gap-5 text-gray-300'}
 		>

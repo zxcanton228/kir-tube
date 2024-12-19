@@ -14,5 +14,6 @@ class UserService {
 			},
 			...data
 		})
+	public readonly toggleLike = async (videoId: string) => instance.put(`${this._BASE_URL}/profile/likes`, { videoId })
 }
 export const userService = new UserService()

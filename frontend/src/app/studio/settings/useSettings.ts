@@ -31,6 +31,7 @@ export function useSettings() {
 			email: profile?.email,
 			name: profile?.name
 		})
+		// eslint-disable-next-line
 	}, [isSuccess, profile])
 
 	const { mutate, isPending } = useMutation({

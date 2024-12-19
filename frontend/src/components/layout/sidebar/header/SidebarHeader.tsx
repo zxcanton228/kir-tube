@@ -7,6 +7,7 @@ export const SidebarHeader = ({ toggleSidebar }: { toggleSidebar: () => void }) 
 		<button
 			onClick={toggleSidebar}
 			className='opacity-85 hover:opacity-100 transition-opacity'
+			title='Toggle sidebar'
 		>
 			<Menu />
 		</button>

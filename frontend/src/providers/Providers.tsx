@@ -8,7 +8,20 @@ import { Provider } from 'react-redux'
 import { store } from 'src/store'
 
 export const Providers = ({ children }: { children: ReactNode }) => {
-	const [queryClient] = useState(() => new QueryClient())
+	const [queryClient] = useState(
+		() =>
+			new QueryClient({
+				defaultOptions: {
+					queries: {
+						refetchOnWindowFocus: false,
+						retry: 1
+					},
+					mutations: {
+						retry: 1
+					}
+				}
+			})
+	)
 	return (
 		<QueryClientProvider client={queryClient}>
 			<Provider store={store}>

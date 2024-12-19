@@ -27,9 +27,9 @@ export const VideoItem = ({ video, Icon }: Props) => {
 					<Image
 						src={video.thumbnailUrl}
 						alt={video.title}
-						width={250}
-						height={140}
-						quality={70}
+						width={307}
+						height={171}
+						quality={60}
 						className='rounded-md'
 					/>
 				</Link>
@@ -63,7 +63,7 @@ export const VideoItem = ({ video, Icon }: Props) => {
 			</div>
 			<div className='mb-1'>
 				<Link
-					href={PAGE.VIDEO(video.id)}
+					href={PAGE.VIDEO(video.publicId)}
 					className='line-clamp-2 leading-[1.3]'
 				>
 					<h3 title={video.title}>{video.title}</h3>
