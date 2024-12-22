@@ -8,7 +8,6 @@ import { Heading } from 'ui/Heading'
 import { VideoItem } from 'ui/video-item/VideoItem'
 
 export const revalidate = 100
-export const dynamic = 'force-static'
 
 export const metadata: Metadata = {
 	title: 'Home',

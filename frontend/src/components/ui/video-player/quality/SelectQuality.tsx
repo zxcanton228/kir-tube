@@ -1,5 +1,6 @@
 'use client'
 
+import cn from 'clsx'
 import { AnimatePresence } from 'framer-motion'
 import * as m from 'framer-motion/m'
 import type { FC } from 'react'
@@ -13,10 +14,12 @@ import { VIDEO_QUALITIES } from './quality.data'
 type Props = {
 	currentValue: EnumVideoPlayerQuality
 	onChange: (quality: EnumVideoPlayerQuality) => void
+	maxResolution: EnumVideoPlayerQuality
 }
-export const SelectQuality: FC<Props> = ({ currentValue, onChange }) => {
-	const { isShow, ref, setIsShow } = useOutside(false)
 
+export const SelectQuality: FC<Props> = ({ currentValue, onChange, maxResolution }) => {
+	const { isShow, ref, setIsShow } = useOutside(false)
+	const availableQualities = VIDEO_QUALITIES.slice(VIDEO_QUALITIES.indexOf(maxResolution))
 	return (
 		<div
 			className='relative'
@@ -36,23 +39,25 @@ export const SelectQuality: FC<Props> = ({ currentValue, onChange }) => {
 						exit={{ opacity: 0, y: 10 }}
 						transition={{ duration: 0.3 }}
 						className='
-			bg-white/10 py-2 px-4 rounded absolute bottom-full right-0 z-10 shadow'
+			bg-gray-800/90 py-2 px-4 rounded absolute bottom-full right-0 z-[105%] shadow'
 					>
-						{VIDEO_QUALITIES.map(quality =>
-							quality === currentValue ? null : (
-								<li key={quality}>
-									<button
-										className='mb-1 transition-colors hover:text-primary'
-										onClick={() => {
-											onChange(quality)
-											setIsShow(false)
-										}}
-									>
-										{quality}
-									</button>
-								</li>
-							)
-						)}
+						{availableQualities.map(quality => (
+							<li key={quality}>
+								<button
+									className={cn('mb-1', {
+										'transition-colors hover:text-primary': quality !== currentValue,
+										'text-primary': quality === currentValue
+									})}
+									disabled={quality === currentValue}
+									onClick={() => {
+										onChange(quality)
+										setIsShow(false)
+									}}
+								>
+									{quality}
+								</button>
+							</li>
+						))}
 					</m.ul>
 				)}
 			</AnimatePresence>

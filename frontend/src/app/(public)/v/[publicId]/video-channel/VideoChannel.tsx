@@ -22,7 +22,7 @@ const DynamicSubscribeButton = dynamic(() => import('src/components/SubscribeBut
 export const VideoChannel: FC<{ channel: IChannel }> = ({ channel }) => {
 	return (
 		<div className='flex items-center justify-between my-6 '>
-			<div className='flex gap-2.5 items-center'>
+			<div className='flex gap-3 items-center'>
 				<Link href={PAGE.CHANNEL(channel.slug)}>
 					<Image
 						alt={channel.user.name || ''}
@@ -45,11 +45,10 @@ export const VideoChannel: FC<{ channel: IChannel }> = ({ channel }) => {
 								{channel.isVerified && <VerifiedBadge size={14} />}
 							</span>
 						</Heading>
-
-						<div className='mb-2 text-gray-400 text-sm flex items-center gap-1'>
-							{transformCount(channel.subscribers.length)} subscribers
-						</div>
 					</Link>
+					<div className='mb-2 text-gray-400 text-sm flex items-center gap-1'>
+						{transformCount(channel.subscribers.length)} subscribers
+					</div>
 				</div>
 			</div>
 			<DynamicSubscribeButton slug={channel.slug} />

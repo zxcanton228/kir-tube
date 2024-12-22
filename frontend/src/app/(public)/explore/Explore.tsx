@@ -10,7 +10,7 @@ import { VideoItem } from 'ui/video-item/VideoItem'
 
 export const Explore = () => {
 	const { data, isLoading } = useQuery({
-		queryKey: ['explorer'],
+		queryKey: ['explore'],
 		queryFn: () => videoService.getExploreVideos()
 	})
 	return (

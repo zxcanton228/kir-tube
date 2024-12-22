@@ -1,6 +1,7 @@
 import type { Metadata } from 'next'
 import Image from 'next/image'
 import channelService from 'src/services/channel.service'
+import type { TPageSlugProp } from 'src/types/page.types'
 
 import { SubscribeButton } from 'src/components/SubscribeButton'
 
@@ -26,9 +27,8 @@ import { ChannelVideos } from './ChannelVideos'
 // })
 
 export const revalidate = 100
-export const dynamic = 'force-static'
 
-export async function generateMetadata({ params }: any): Promise<Metadata> {
+export async function generateMetadata({ params }: TPageSlugProp): Promise<Metadata> {
 	const { slug } = await params
 	const { data: channel } = await channelService.bySlug(slug)
 	return {
@@ -52,7 +52,7 @@ export async function generateStaticParams() {
 	}))
 }
 
-export default async function ChannelPage({ params }: any) {
+export default async function ChannelPage({ params }: TPageSlugProp) {
 	const { slug } = await params
 	const { data: channel } = await channelService.bySlug(slug)
 

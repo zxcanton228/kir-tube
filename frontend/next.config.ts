@@ -10,14 +10,13 @@ const nextConfig: NextConfig = {
 	devIndicators: {
 		appIsrStatus: false
 	},
-	async rewrites() {
-		return [
-			{
-				source: '/uploads/:path*',
-				destination: `${process.env.NEXT_PUBLIC_SERVER_URL}/uploads/:path*`.replace('/api', '')
-			}
-		]
-	}
+
+	rewrites: async () => [
+		{
+			source: '/uploads/:path*',
+			destination: `${process.env.NEXT_PUBLIC_SERVER_URL}/uploads/:path*`.replace('/api', '')
+		}
+	]
 }
 
 export default nextConfig

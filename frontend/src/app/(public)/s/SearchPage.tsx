@@ -1,3 +1,5 @@
+'use client'
+
 import { useQuery } from '@tanstack/react-query'
 import { Search } from 'lucide-react'
 import { useSearchParams } from 'next/navigation'
@@ -8,11 +10,11 @@ import { SkeletonLoader } from 'ui/SkeletonLoader'
 import { VideoItem } from 'ui/video-item/VideoItem'
 
 export function SearchPage() {
-	const searchParams = useSearchParams()
+	const term = useSearchParams().get('term')
 
 	const { data, isLoading } = useQuery({
-		queryKey: ['search', searchParams.get('term')],
-		queryFn: () => videoService.getAll(searchParams.get('term'))
+		queryKey: ['search', term],
+		queryFn: () => videoService.getAll(term)
 	})
 
 	return (
@@ -21,7 +23,7 @@ export function SearchPage() {
 				isH1
 				Icon={Search}
 			>
-				Search &quot;{searchParams.get('term')}&quot;
+				Search &quot;{term}&quot;
 			</Heading>
 			<div className='grid grid-cols-6 gap-6'>
 				{isLoading ? (

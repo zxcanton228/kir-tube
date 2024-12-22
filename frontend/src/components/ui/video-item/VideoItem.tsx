@@ -34,7 +34,7 @@ export const VideoItem = ({ video, Icon }: Props) => {
 					/>
 				</Link>
 				<Link
-					href={PAGE.CHANNEL(video.channel.slug)}
+					href={PAGE.CHANNEL(video.channel?.slug) || ''}
 					className='absolute bottom-2 left-2'
 				>
 					<Image

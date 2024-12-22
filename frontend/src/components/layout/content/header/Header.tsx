@@ -11,7 +11,7 @@ const DynamicHeaderProfile = dynamic(() => import('./profile/HeaderProfile').the
 })
 export const Header = () => {
 	return (
-		<header className='p-layout border-b border-border flex items-center justify-between'>
+		<header className='relative z-[1] p-layout border-b border-border flex items-center justify-between'>
 			<SearchField />
 			<div className='flex items-center gap-8'>
 				<HeaderLinks />

@@ -9,6 +9,7 @@ import { SkeletonLoader } from 'ui/SkeletonLoader'
 
 export const HeaderAvatar = () => {
 	const { isLoading, profile } = useProfile()
+
 	if (isLoading) return <SkeletonLoader className='w-10 mb-0 rounded-md' />
 	return (
 		<div className='relative'>

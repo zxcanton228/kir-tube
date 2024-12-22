@@ -53,21 +53,23 @@ export const VideoActions: FC<{ video: ISingleVideoResponse }> = ({ video }) => 
 		}
 	})
 	return (
-		<div className='flex items-center gap-7'>
-			<button className='flex items-center gap-1 transition-opacity opacity-80 hover:opacity-100'>
-				<ListPlus size={20} />
-				Save
-			</button>
-			<button
-				onClick={() => mutate()}
-				className='text-primary flex items-center gap-1.5 transition-opacity opacity-80 hover:opacity-100'
-			>
-				<Heart
-					fill={isLiked ? COLORS.primary : 'transparent'}
-					size={20}
-				/>
-				{transformCount(optimisticLike)}
-			</button>
-		</div>
+		profile && (
+			<div className='flex items-center gap-7'>
+				<button className='flex items-center gap-1 transition-opacity opacity-80 hover:opacity-100'>
+					<ListPlus size={20} />
+					Save
+				</button>
+				<button
+					onClick={() => mutate()}
+					className='text-primary flex items-center gap-1.5 transition-opacity opacity-80 hover:opacity-100'
+				>
+					<Heart
+						fill={isLiked ? COLORS.primary : 'transparent'}
+						size={20}
+					/>
+					{transformCount(optimisticLike)}
+				</button>
+			</div>
+		)
 	)
 }

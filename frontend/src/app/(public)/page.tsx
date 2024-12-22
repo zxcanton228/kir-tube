@@ -10,7 +10,6 @@ import { VideoItem } from 'ui/video-item/VideoItem'
 import { Explore } from './explore/Explore'
 
 export const revalidate = 100
-export const dynamic = 'force-static'
 
 export const metadata: Metadata = {
 	title: 'Home',
@@ -28,7 +27,6 @@ export const metadata: Metadata = {
 export default async function Home() {
 	const videos = (await videoService.getTrendingVideos()).data
 
-	// const trendingVideos = videos.slice(0, 6)
 	return (
 		<section>
 			{!!videos.length && (

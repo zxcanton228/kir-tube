@@ -13,7 +13,7 @@ const DynamicLogout = dynamic(() => import('./Logout').then(mod => mod.Logout), 
 export const Sidebar = ({ toggleSidebar, isShowedSidebar }: { toggleSidebar: () => void; isShowedSidebar: boolean }) => {
 	const pathname = usePathname()
 	return (
-		<aside className='p-layout border-r border-border whitespace-nowrap overflow-hidden'>
+		<aside className='relative z-[1] p-layout border-r border-border whitespace-nowrap overflow-hidden'>
 			<SidebarHeader toggleSidebar={toggleSidebar} />
 			<SidebarMenu
 				menu={SIDEBAR_DATA}

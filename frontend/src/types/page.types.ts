@@ -1,5 +1,7 @@
 export interface IPageProps<T> {
-	params: T
+	params: Promise<T>
 }
-export type TPageSlugProps = IPageProps<{ slug: string }>
-export type TPageIdProps = IPageProps<{ id: string }>
+
+export type TPageSlugProp = IPageProps<{ slug: string }>
+export type TPageIdProp = IPageProps<{ id: string }>
+export type TPagePublicIdProp = IPageProps<{ publicId: string }>

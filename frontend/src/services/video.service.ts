@@ -26,7 +26,9 @@ class VideoService {
 
 	public readonly getGamesVideos = async () => axiosClassic.get<IVideosPagination>(`${this._BASE_URL}/games`)
 
-	public readonly getExploreVideos = async (): Promise<AxiosResponse<IVideosPagination>> =>
-		axiosClassic.get<IVideosPagination>(`${this._BASE_URL}/explore`)
+	public readonly getExploreVideos = async (userId?: string | number | null) =>
+		axiosClassic.get<IVideosPagination>(`${this._BASE_URL}/explore`, {
+			params: { userId }
+		})
 }
 export const videoService = new VideoService()

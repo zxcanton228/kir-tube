@@ -25,14 +25,15 @@ export function SubscriptionsPage() {
 						count={6}
 						className='h-36 rounded-md'
 					/>
-				) : (
-					profile?.subscribedVideos?.length &&
+				) : profile?.subscribedVideos?.length ? (
 					profile?.subscribedVideos?.map(video => (
 						<VideoItem
 							key={video.id}
 							video={video}
 						/>
 					))
+				) : (
+					<p>Subscriptions not found!</p>
 				)}
 			</div>
 		</section>
