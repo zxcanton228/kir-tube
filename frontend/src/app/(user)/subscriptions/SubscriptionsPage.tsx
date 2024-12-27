@@ -1,6 +1,6 @@
 'use client'
 
-import { Heart } from 'lucide-react'
+import { CalendarCheck } from 'lucide-react'
 
 import { useProfile } from 'src/hooks/useProfile'
 
@@ -15,7 +15,7 @@ export function SubscriptionsPage() {
 		<section>
 			<Heading
 				isPageHeading
-				Icon={Heart}
+				Icon={CalendarCheck}
 			>
 				Subscriptions
 			</Heading>
@@ -33,7 +33,7 @@ export function SubscriptionsPage() {
 						/>
 					))
 				) : (
-					<p>Subscriptions not found!</p>
+					<p>You have not subscribed to anyone yet, or they have not posted a single video.</p>
 				)}
 			</div>
 		</section>

@@ -8,7 +8,7 @@ type Out = (video?: HTMLCustomVideoElement | null) => {
 
 export const getVideoInfo: Out = video => {
 	const currentTime = video?.currentTime || 0
-	const originalTime = video?.duration || 0
+	const originalTime = video?.duration || 1
 
 	return {
 		currentTime,

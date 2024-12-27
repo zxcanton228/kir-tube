@@ -17,14 +17,12 @@ interface Props {
 }
 
 export function useVideoHotkeys({ volume, ...fn }: Props) {
-	// useHotkeys('space', e => {
-	// 	e.preventDefault()
-	// 	fn.togglePlayPause()
-	// })
-
 	useEffect(() => {
 		const handleKeyDown = (event: KeyboardEvent) => {
-			if (event.code === 'Space' || event.key === ' ') {
+			const target = event.target as HTMLElement
+			const isInputField = target.tagName === 'INPUT' || target.tagName === 'TEXTAREA' || target.isContentEditable
+
+			if (!isInputField && (event.code === 'Space' || event.key === ' ')) {
 				event.preventDefault()
 				fn.togglePlayPause()
 			}

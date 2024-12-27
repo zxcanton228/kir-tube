@@ -9,15 +9,13 @@ const DynamicHeaderProfile = dynamic(() => import('./profile/HeaderProfile').the
 	ssr: false,
 	loading: () => <SkeletonLoader className='w-10 mb-0 rounded-md' />
 })
-export const Header = () => {
-	return (
-		<header className='relative z-[1] p-layout border-b border-border flex items-center justify-between'>
-			<SearchField />
-			<div className='flex items-center gap-8'>
-				<HeaderLinks />
+export const Header = () => (
+	<header className='relative z-[1] p-layout border-b border-border flex items-center justify-between'>
+		<SearchField />
+		<div className='flex items-center gap-8'>
+			<HeaderLinks />
 
-				<DynamicHeaderProfile />
-			</div>
-		</header>
-	)
-}
+			<DynamicHeaderProfile />
+		</div>
+	</header>
+)

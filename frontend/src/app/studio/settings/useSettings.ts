@@ -2,7 +2,7 @@ import { useMutation } from '@tanstack/react-query'
 import { useEffect } from 'react'
 import { type SubmitHandler, useForm } from 'react-hook-form'
 import toast from 'react-hot-toast'
-import { userService } from 'src/services/user.service'
+import { userService } from 'src/services/studio/user.service'
 
 import { useProfile } from 'src/hooks/useProfile'
 

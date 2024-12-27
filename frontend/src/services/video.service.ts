@@ -26,6 +26,9 @@ class VideoService {
 
 	public readonly getGamesVideos = async () => axiosClassic.get<IVideosPagination>(`${this._BASE_URL}/games`)
 
+	public readonly updateViews = async (publicId: string) =>
+		axiosClassic.put(`${this._BASE_URL}/update-views-count/${publicId}`)
+
 	public readonly getExploreVideos = async (userId?: string | number | null) =>
 		axiosClassic.get<IVideosPagination>(`${this._BASE_URL}/explore`, {
 			params: { userId }

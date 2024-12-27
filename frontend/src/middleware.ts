@@ -15,5 +15,5 @@ export async function middleware(request: NextRequest) {
 }
 
 export const config = {
-	matcher: ['/studio/:path*', '/auth/:path*', '/subscriptions/:path*']
+	matcher: ['/studio/:path*', '/auth', '/subscriptions', '/liked-videos', '/history', '/playlists']
 }

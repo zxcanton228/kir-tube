@@ -1,5 +1,5 @@
 import { UploadCloud } from 'lucide-react'
-import { useId } from 'react'
+import { type FC, useId } from 'react'
 import type { FieldError } from 'react-hook-form'
 
 import { ImagePreview } from './ImagePreview'
@@ -8,26 +8,28 @@ import { useUpload } from './useUpload'
 interface Props {
 	folder?: string
 	value?: string
+	// eslint-disable-next-line
 	onChange: (url: string) => void
 	label: string
 	error?: FieldError
 	className?: string
 	isImage?: boolean
-	aspectRation?: '16:9' | '1:1'
+
 	overlay?: string
+	sizePreview?: [number, number]
 }
 
-export function UploadField({
+export const UploadField: FC<Props> = ({
 	label,
-	aspectRation = '1:1',
 	onChange,
 	className,
 	error,
 	folder,
 	isImage = true,
 	value,
-	overlay
-}: Props) {
+	overlay,
+	sizePreview = [100, 100]
+}) => {
 	const { isLoading, uploadFile } = useUpload({ onChange, folder })
 	const inputId = useId()
 
@@ -56,8 +58,8 @@ export function UploadField({
 			{error && <p className='text-red-500 text-sm mt-1'>{error.message}</p>}
 			{isImage && (
 				<ImagePreview
+					sizePreview={sizePreview}
 					isLoading={isLoading}
-					aspectRation={aspectRation}
 					overlay={overlay}
 					value={value}
 				/>

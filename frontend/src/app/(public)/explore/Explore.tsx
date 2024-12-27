@@ -13,6 +13,7 @@ export const Explore = () => {
 		queryKey: ['explore'],
 		queryFn: () => videoService.getExploreVideos()
 	})
+
 	return (
 		<section>
 			<Heading Icon={Compass}>Explore</Heading>

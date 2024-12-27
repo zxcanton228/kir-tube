@@ -1,5 +1,5 @@
 import { useQuery } from '@tanstack/react-query'
-import { userService } from 'src/services/user.service'
+import { userService } from 'src/services/studio/user.service'
 
 export function useProfile() {
 	const { data, isLoading, isFetching, isPending, isRefetching, isSuccess, refetch } = useQuery({

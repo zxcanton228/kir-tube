@@ -20,7 +20,7 @@ export function useVideoProgress(playerRef: RefObject<HTMLCustomVideoElement | n
 		}
 
 		player.addEventListener('loadedmetadata', handleLoadedMetadata)
-
+		if (player.readyState >= 1) handleLoadedMetadata()
 		return () => {
 			player.removeEventListener('loadedmetadata', handleLoadedMetadata)
 		}

@@ -15,14 +15,14 @@ export const HeaderAvatar = () => {
 		<div className='relative'>
 			<Link
 				href={STUDIO_PAGE.SETTINGS}
-				className='shrink-0'
+				className='shrink-0 w-10 h-10 '
 			>
 				<Image
 					alt='Profile avatar'
 					width={40}
 					height={40}
 					src={profile?.channel?.avatarUrl || '/avatar.png'}
-					className='rounded-lg'
+					className='rounded-lg w-10 h-10 object-cover'
 					quality={75}
 				/>
 			</Link>

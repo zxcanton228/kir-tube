@@ -21,19 +21,17 @@ const links: { href: string; Icon: LucideIcon; label: string }[] = [
 	}
 ]
 
-export const HeaderLinks = () => {
-	return (
-		<nav className='flex items-center gap-5'>
-			{links.map(({ href, Icon, label }) => (
-				<Link
-					href={href}
-					title={label}
-					key={label}
-					className='transition-opacity hover:opacity-100 opacity-50'
-				>
-					<Icon />
-				</Link>
-			))}
-		</nav>
-	)
-}
+export const HeaderLinks = () => (
+	<nav className='flex items-center gap-5'>
+		{links.map(({ href, Icon, label }) => (
+			<Link
+				href={href}
+				title={label}
+				key={label}
+				className='transition-opacity hover:opacity-100 opacity-50'
+			>
+				<Icon />
+			</Link>
+		))}
+	</nav>
+)

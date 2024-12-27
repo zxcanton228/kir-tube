@@ -1,5 +1,6 @@
 import { type Dispatch, type SetStateAction, useEffect, useRef, useState } from 'react'
 
+// eslint-disable-next-line
 type TypeOut = (initialIsVisible: boolean) => {
 	ref: any
 	isShow: boolean
@@ -11,9 +12,7 @@ export const useOutside: TypeOut = initialIsVisible => {
 	const ref = useRef<HTMLElement>(null)
 
 	const handleClickOutside = (event: any) => {
-		if (ref.current && !ref.current.contains(event.target)) {
-			setIsShow(false)
-		}
+		if (ref.current && !ref.current.contains(event.target)) setIsShow(false)
 	}
 
 	useEffect(() => {

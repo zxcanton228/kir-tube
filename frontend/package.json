@@ -4,6 +4,7 @@
 	"private": true,
 	"scripts": {
 		"dev": "next dev --turbopack",
+		"cache": "rm -r ./.next",
 		"build": "next build",
 		"start": "next start",
 		"prod": "next build && next start",

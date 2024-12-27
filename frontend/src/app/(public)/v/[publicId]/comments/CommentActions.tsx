@@ -6,6 +6,8 @@ import type { IComment, ICommentData } from 'src/types/comment.types'
 
 import { useAuth } from 'src/hooks/useAuth'
 
+import { Button } from 'ui/button/Button'
+
 type Props = { comment: IComment; refetch: () => void; newText: string }
 export const CommentActions: FC<Props> = ({ comment, refetch, newText }) => {
 	const { isLoggedIn, user } = useAuth()
@@ -43,13 +45,12 @@ export const CommentActions: FC<Props> = ({ comment, refetch, newText }) => {
 			>
 				Save
 			</button>
-			<button
+			<Button
 				onClick={() => deleteComment()}
-				className='text-gray-400 text-sm hover:opacity-100 opacity-90 transition-opacity'
-				disabled={idDeletePending}
+				isLoading={idDeletePending}
 			>
 				{idDeletePending ? '...' : 'Delete'}
-			</button>
+			</Button>
 		</div>
 	)
 }
