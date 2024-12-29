@@ -2,6 +2,7 @@ import * as m from 'framer-motion/m'
 import { type LucideIcon } from 'lucide-react'
 import Image from 'next/image'
 import Link from 'next/link'
+import type { FC } from 'react'
 import type { IVideo } from 'src/types/video.types'
 
 import { PAGE } from 'src/config/public-page.config'
@@ -15,9 +16,10 @@ import { VideoItemTitle } from './VideoItemTitle'
 interface Props {
 	video: IVideo
 	Icon?: LucideIcon
+	isImagePriority?: boolean
 }
 
-export const VideoItem = ({ video, Icon }: Props) => {
+export const VideoItem: FC<Props> = ({ video, Icon, isImagePriority = false }) => {
 	return (
 		<m.article
 			whileHover={{ scale: 1.03, y: -5 }}
@@ -28,8 +30,8 @@ export const VideoItem = ({ video, Icon }: Props) => {
 					<Image
 						src={video.thumbnailUrl}
 						alt={video.title}
-						width={307}
-						height={171}
+						width={306}
+						height={172}
 						quality={60}
 						className='rounded-md'
 					/>
@@ -44,6 +46,7 @@ export const VideoItem = ({ video, Icon }: Props) => {
 						width={35}
 						height={35}
 						quality={60}
+						priority={isImagePriority}
 						className='rounded-full shadow'
 					/>
 				</Link>

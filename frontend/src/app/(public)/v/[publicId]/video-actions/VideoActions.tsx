@@ -6,8 +6,6 @@ import { type FC, startTransition, useEffect, useState } from 'react'
 import { userService } from 'src/services/studio/user.service'
 import type { ISingleVideoResponse } from 'src/types/video.types'
 
-import { COLORS } from 'src/constants/colors.constants'
-
 import { useProfile } from 'src/hooks/useProfile'
 
 import { transformCount } from 'src/utils/transform-count'
@@ -61,10 +59,10 @@ export const VideoActions: FC<{ video: ISingleVideoResponse }> = ({ video }) => 
 				<SaveToPlaylist videoId={video.id} />
 				<button
 					onClick={() => mutate()}
-					className='text-primary flex items-center gap-1.5 transition-opacity opacity-80 hover:opacity-100'
+					className='text-[#FF453A] flex items-center gap-1.5 transition-opacity opacity-80 hover:opacity-100'
 				>
 					<Heart
-						fill={isLiked ? COLORS.primary : 'transparent'}
+						fill={isLikedLocal ? '#FF453A' : 'transparent'}
 						size={20}
 					/>
 					{transformCount(optimisticLike)}

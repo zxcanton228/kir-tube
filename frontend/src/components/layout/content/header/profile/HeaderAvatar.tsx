@@ -21,7 +21,7 @@ export const HeaderAvatar = () => {
 					alt='Profile avatar'
 					width={40}
 					height={40}
-					src={profile?.channel?.avatarUrl || '/avatar.png'}
+					src={profile?.channel?.avatarUrl || '/images/avatar.png'}
 					className='rounded-lg w-10 h-10 object-cover'
 					quality={75}
 				/>

@@ -10,10 +10,11 @@ import { SkeletonLoader } from 'ui/SkeletonLoader'
 import { VideoPlayer } from 'ui/video-player/VideoPlayer'
 
 import { SimilarVideos } from './SimilarVideos'
-import { Comments } from './comments/Comments'
 import { VideoDescription } from './description/VideoDescription'
 import { useUpdateViews } from './useUpdateViews'
 import { VideoChannel } from './video-channel/VideoChannel'
+
+const DynamicComments = dynamic(() => import('./comments/Comments').then(mod => mod.Comments))
 
 const VideoActions = dynamic(() => import('./video-actions/VideoActions').then(mod => mod.VideoActions), {
 	ssr: false,
@@ -56,7 +57,7 @@ export const SingleVideo: FC<{ video: ISingleVideoResponse }> = ({ video }) => {
 				<VideoChannel channel={video.channel} />
 
 				<VideoDescription description={video.description} />
-				<Comments video={video} />
+				<DynamicComments video={video} />
 			</div>
 
 			{!!video.similarVideos.length && (

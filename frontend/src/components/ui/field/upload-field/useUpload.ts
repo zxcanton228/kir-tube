@@ -1,11 +1,11 @@
 import { useMutation } from '@tanstack/react-query'
 import { type ChangeEvent, useCallback } from 'react'
-import toast from 'react-hot-toast'
 import { fileService } from 'src/services/studio/file.service'
 import type { IFileResponse } from 'src/types/file.types'
 
 import { validateFileSize } from './validate-file-size'
 
+/* eslint-disable */
 interface Props {
 	folder?: string
 	onChange?: (...event: any[]) => void
@@ -18,7 +18,7 @@ type TUseUpload = (props: Props) => {
 	uploadFile: (e: ChangeEvent<HTMLInputElement>) => void
 	isLoading: boolean
 }
-
+/* eslint-enable */
 export const useUpload: TUseUpload = ({ onChange, folder, onError, onSuccess, maxFileSize }) => {
 	const { mutate, isPending } = useMutation({
 		mutationKey: ['upload file'],
@@ -27,7 +27,8 @@ export const useUpload: TUseUpload = ({ onChange, folder, onError, onSuccess, ma
 			if (onChange) onChange(data[0].url)
 			if (onSuccess) onSuccess(data)
 		},
-		onError: error => {
+		onError: async error => {
+			const { toast } = await import('react-hot-toast')
 			toast.error(error.message)
 			if (onError) onError()
 		}

@@ -1,7 +1,6 @@
 import { useMutation } from '@tanstack/react-query'
 import { useEffect } from 'react'
 import { type SubmitHandler, useForm } from 'react-hook-form'
-import toast from 'react-hot-toast'
 import { userService } from 'src/services/studio/user.service'
 
 import { useProfile } from 'src/hooks/useProfile'
@@ -37,7 +36,8 @@ export function useSettings() {
 	const { mutate, isPending } = useMutation({
 		mutationKey: ['update-settings'],
 		mutationFn: (data: ISettingsData) => userService.updateProfile(data),
-		onSuccess: () => {
+		onSuccess: async () => {
+			const { toast } = await import('react-hot-toast')
 			toast.success('Profile updated successfully!')
 			refetch()
 		}

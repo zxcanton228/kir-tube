@@ -1,4 +1,5 @@
 import type { AxiosResponse } from 'axios'
+import type { IPaginationParams } from 'src/types/pagination.types'
 import type { ISingleVideoResponse, IVideo, IVideosPagination } from 'src/types/video.types'
 
 import { axiosClassic } from 'src/api/axios'
@@ -29,9 +30,12 @@ class VideoService {
 	public readonly updateViews = async (publicId: string) =>
 		axiosClassic.put(`${this._BASE_URL}/update-views-count/${publicId}`)
 
-	public readonly getExploreVideos = async (userId?: string | number | null) =>
-		axiosClassic.get<IVideosPagination>(`${this._BASE_URL}/explore`, {
-			params: { userId }
+	public readonly getExploreVideos = async (userId?: string | number, params?: IPaginationParams, excludeIds?: string[]) => {
+		const excludeIdsToString = excludeIds?.join(',') || ''
+		const { data } = await axiosClassic.get<IVideosPagination>(`${this._BASE_URL}/explore`, {
+			params: userId ? { userId, ...params, excludeIds: excludeIdsToString } : params
 		})
+		return data
+	}
 }
 export const videoService = new VideoService()

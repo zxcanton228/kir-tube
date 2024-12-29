@@ -5,7 +5,6 @@ import * as m from 'framer-motion/m'
 import { X } from 'lucide-react'
 import type { FC, RefObject } from 'react'
 import { type SubmitHandler, useForm } from 'react-hook-form'
-import toast from 'react-hot-toast'
 import { useHotkeys } from 'react-hotkeys-hook'
 import { playlistService } from 'src/services/playlist.service'
 import type { IPlaylistData } from 'src/types/playlist.types'
@@ -27,7 +26,8 @@ export const CreatePlaylist: FC<Props> = ({ refetch, onClose, ref }) => {
 	const { mutate, isPending } = useMutation({
 		mutationKey: ['create playlist'],
 		mutationFn: (data: IPlaylistData) => playlistService.createPlaylist(data),
-		onSuccess: () => {
+		onSuccess: async () => {
+			const { toast } = await import('react-hot-toast')
 			refetch()
 			reset()
 			onClose()

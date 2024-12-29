@@ -2,7 +2,6 @@ import * as m from 'framer-motion/m'
 import { Upload } from 'lucide-react'
 import { type ChangeEvent, type DragEvent, type FC, useState } from 'react'
 import type { UseFormReset } from 'react-hook-form'
-import toast from 'react-hot-toast'
 import type { IVideoFormData } from 'src/types/studio-video.types'
 import { twMerge } from 'tailwind-merge'
 
@@ -17,7 +16,7 @@ export const DragNDropVideo: FC<Props> = ({ reset }) => {
 		// 3gb
 		maxFileSize: 3 * 1024 * 1024 * 1024,
 		folder: 'videos',
-		onSuccess: data => {
+		onSuccess: async data => {
 			const file = data[0]
 			if (!file) return
 
@@ -26,10 +25,12 @@ export const DragNDropVideo: FC<Props> = ({ reset }) => {
 				maxResolution: file.maxResolution,
 				title: file.name
 			})
+			const { toast } = await import('react-hot-toast')
 
 			toast.success('File uploaded successfully!')
 		},
-		onError: () => {
+		onError: async () => {
+			const { toast } = await import('react-hot-toast')
 			toast.error('Failed to upload the video')
 		}
 	})

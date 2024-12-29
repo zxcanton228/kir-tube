@@ -2,12 +2,10 @@ FROM oven/bun:latest AS builder
 
 WORKDIR /app
 
-COPY package*.json ./
+COPY package*.json bun.lockb dist ./
 COPY prisma ./prisma
-COPY bun.lockb ./
-COPY dist ./
 
-RUN bun install
+RUN bun install --frozen-lockfile
 RUN bun prisma generate
 
 COPY . .
@@ -21,7 +19,12 @@ COPY --from=builder /app/package*.json ./
 COPY --from=builder /app/uploads ./uploads
 COPY --from=builder /app/prisma ./prisma
 COPY --from=builder /app/emails ./emails
-COPY --from=builder /app/tsconfig*.json ./
+COPY --from=builder /app/tsconfig*.json ./ 
+
+RUN apt-get update && \
+    apt-get install -y ffmpeg && \
+    rm -rf /var/lib/apt/lists/*
+
 
 EXPOSE 4200
 CMD ["bun", "run", "prod"]

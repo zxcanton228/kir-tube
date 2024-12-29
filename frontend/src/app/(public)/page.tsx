@@ -7,7 +7,7 @@ import { PAGE } from 'src/config/public-page.config'
 import { Heading } from 'ui/Heading'
 import { VideoItem } from 'ui/video-item/VideoItem'
 
-import { Explore } from './explore/Explore'
+import { ExploreSection } from './explore/ExploreSection'
 
 export const revalidate = 100
 
@@ -43,7 +43,7 @@ export default async function Home() {
 					</div>
 				</section>
 			)}
-			<Explore />
+			<ExploreSection />
 		</section>
 	)
 }

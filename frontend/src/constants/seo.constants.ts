@@ -4,3 +4,4 @@ export const NO_INDEX_PAGE = {
 		follow: false
 	}
 }
+export const SITE_NAME = 'KIR Video'

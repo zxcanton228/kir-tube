@@ -27,6 +27,9 @@ export interface IFullVideo extends IVideo {
 export interface ISingleVideoResponse extends IFullVideo {
 	similarVideos: IVideo[]
 }
+export interface IStudioVideoResponse extends IFullVideo {
+	tags: ITag[]
+}
 
 export interface IUser {
 	id: string

@@ -2,7 +2,6 @@
 
 import { useMutation, useQuery } from '@tanstack/react-query'
 import { History } from 'lucide-react'
-import toast from 'react-hot-toast'
 import { watchHistoryService } from 'src/services/watch-history.service'
 
 import { Heading } from 'ui/Heading'
@@ -18,8 +17,9 @@ export function HistoryPage() {
 	const { mutate, isPending } = useMutation({
 		mutationKey: ['clearHistory'],
 		mutationFn: () => watchHistoryService.clearHistory(),
-		onSuccess: () => {
+		onSuccess: async () => {
 			refetch()
+			const { toast } = await import('react-hot-toast')
 			toast.success('History cleared!')
 		}
 	})

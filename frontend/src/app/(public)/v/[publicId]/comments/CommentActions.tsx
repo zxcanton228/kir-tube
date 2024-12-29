@@ -1,12 +1,9 @@
 import { useMutation } from '@tanstack/react-query'
 import type { FC } from 'react'
-import toast from 'react-hot-toast'
 import { commentService } from 'src/services/comment.service'
 import type { IComment, ICommentData } from 'src/types/comment.types'
 
 import { useAuth } from 'src/hooks/useAuth'
-
-import { Button } from 'ui/button/Button'
 
 type Props = { comment: IComment; refetch: () => void; newText: string }
 export const CommentActions: FC<Props> = ({ comment, refetch, newText }) => {
@@ -15,22 +12,26 @@ export const CommentActions: FC<Props> = ({ comment, refetch, newText }) => {
 	const { mutate: updateComment, isPending: isUpdatePending } = useMutation({
 		mutationKey: ['create comment'],
 		mutationFn: (data: ICommentData) => commentService.update(comment.id, data),
-		onSuccess: () => {
+		onSuccess: async () => {
 			refetch()
+			const { toast } = await import('react-hot-toast')
 			toast.success('Comment updated')
 		},
-		onError: () => {
+		onError: async () => {
+			const { toast } = await import('react-hot-toast')
 			toast.success("Comment don't updated")
 		}
 	})
 	const { mutate: deleteComment, isPending: idDeletePending } = useMutation({
 		mutationKey: ['create comment'],
 		mutationFn: () => commentService.delete(comment.id),
-		onSuccess: () => {
+		onSuccess: async () => {
 			refetch()
+			const { toast } = await import('react-hot-toast')
 			toast.success('Comment deleted')
 		},
-		onError: () => {
+		onError: async () => {
+			const { toast } = await import('react-hot-toast')
 			toast.error("Comment don't deleted")
 		}
 	})
@@ -45,12 +46,12 @@ export const CommentActions: FC<Props> = ({ comment, refetch, newText }) => {
 			>
 				Save
 			</button>
-			<Button
+			<button
+				className='text-gray-400 text-sm hover:opacity-100 opacity-90 transition-opacity'
 				onClick={() => deleteComment()}
-				isLoading={idDeletePending}
 			>
 				{idDeletePending ? '...' : 'Delete'}
-			</Button>
+			</button>
 		</div>
 	)
 }

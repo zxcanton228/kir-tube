@@ -29,7 +29,7 @@ export const CommentItem: FC<Props> = ({ comment, refetch }) => {
 				<Link href={PAGE.CHANNEL(comment?.user?.channel?.slug || '')}>
 					<Image
 						alt={comment.user.name || ''}
-						src={comment.user.channel?.avatarUrl || '/avatar.png'}
+						src={comment.user.channel?.avatarUrl || '/images/avatar.png'}
 						width={40}
 						height={40}
 						quality={50}

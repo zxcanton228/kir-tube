@@ -13,7 +13,12 @@ interface Props {
 
 export const Heading: FC<Props> = ({ children, Icon, isPageHeading = false, isH1 = false, className, classNameHeading }) => (
 	<div className={twMerge('flex items-center opacity-90', isPageHeading ? 'gap-2.5 mb-6' : 'gap-1.5 mb-4', className)}>
-		{Icon && <Icon className='text-primary' />}
+		{Icon && (
+			<Icon
+				className='text-primary'
+				size={isPageHeading ? 30 : 24}
+			/>
+		)}
 		{isH1 || isPageHeading ? (
 			<h1 className={twMerge('font-semibold', isPageHeading ? 'text-[2rem]' : 'text-lg', classNameHeading)}>{children}</h1>
 		) : (

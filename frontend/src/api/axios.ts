@@ -39,7 +39,7 @@ instance.interceptors.response.use(
 			} catch (error) {
 				if (errorCatch(error) === 'jwt expired' || errorCatch(error) === 'Refresh token not passed') {
 					authService.removeFromStorage()
-					throw error
+					return null
 				}
 			}
 		}

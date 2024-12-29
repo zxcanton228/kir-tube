@@ -86,7 +86,7 @@ export function SettingsForm() {
 							render={({ field: { value, onChange }, fieldState: { error } }) => (
 								<UploadField
 									label='Banner'
-									overlay='/overlay.png'
+									overlay='/images/overlay.png'
 									onChange={onChange}
 									value={value}
 									error={error}

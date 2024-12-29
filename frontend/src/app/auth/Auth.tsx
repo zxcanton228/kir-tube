@@ -1,7 +1,6 @@
 'use client'
 
 import { useState } from 'react'
-import ReCAPTCHA from 'react-google-recaptcha'
 import { useForm } from 'react-hook-form'
 
 import { Logo } from 'src/components/layout/sidebar/header/Logo'
@@ -10,11 +9,10 @@ import { SkeletonLoader } from 'ui/SkeletonLoader'
 import { Button } from 'ui/button/Button'
 import { Field } from 'ui/field/Field'
 
+import { Recaptcha } from './Recaptcha'
 import { SwitchAuth } from './SwitchAuth'
 import type { IAuthForm } from './auth-form.types'
 import { useAuthForm } from './useAuthForm'
-
-import styles from './captcha.module.scss'
 
 export function Auth() {
 	const [isLogin, setIsLogin] = useState<boolean>(true)
@@ -82,13 +80,7 @@ export function Auth() {
 									placeholder='Enter password again:'
 								/>
 							)}
-							<ReCAPTCHA
-								ref={recaptchaRef}
-								size='normal'
-								sitekey={process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY as string}
-								theme='light'
-								className={styles.recaptcha}
-							/>
+							<Recaptcha forwardRef={recaptchaRef} />
 						</>
 					)}
 					<div className='text-center mt-6'>

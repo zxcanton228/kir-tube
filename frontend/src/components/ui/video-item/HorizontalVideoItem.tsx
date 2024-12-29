@@ -39,7 +39,7 @@ export const HorizontalVideoItem: FC<Props> = ({ video }) => (
 				<Image
 					src={video.thumbnailUrl}
 					width={206}
-					height={116}
+					height={115}
 					alt={video.title}
 					className='rounded-md'
 					quality={60}

@@ -7,9 +7,9 @@ import type { IVideoFormData } from 'src/types/studio-video.types'
 
 import { Heading } from 'ui/Heading'
 
+import { CreateVideoForm } from './CreateVideoForm'
 import { DragNDropVideo } from './DragNDropVideo'
 import { ProgressVideoProcessing } from './ProgressVideoProcessing'
-import { VideoForm } from './VideoForm'
 
 const UploadVideoForm: FC = () => {
 	const form = useForm<IVideoFormData>({
@@ -43,7 +43,7 @@ const UploadVideoForm: FC = () => {
 					{!fileName && <DragNDropVideo reset={form.reset} />}
 
 					{!!fileName && (
-						<VideoForm
+						<CreateVideoForm
 							form={form}
 							isReadyToPublish={isReadyToPublish}
 						/>
