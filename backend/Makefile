@@ -1,6 +1,2 @@
-up:
-	docker-compose up -d
-build:
-	docker-compose up -d --build
-stop:
-	docker stop nest db
+db-push:
+	bun prisma db push && bun prisma generate && bun seed:run

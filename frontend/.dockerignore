@@ -1,0 +1,11 @@
+node_modules
+Dockerfile
+.next
+.vscode
+.gitignore
+.github
+.DS_Store
+.idea
+
+.env.development
+.env.tests

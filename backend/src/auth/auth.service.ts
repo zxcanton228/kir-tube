@@ -7,19 +7,20 @@ import {
 	NotFoundException,
 	UnauthorizedException
 } from '@nestjs/common'
+import { ConfigService } from '@nestjs/config'
 import { JwtService } from '@nestjs/jwt'
 import { User } from '@prisma/client'
 import { hash, verify } from 'argon2'
-import { omit } from 'lodash'
 import { AuthDto } from './dto/auth.dto'
 
 @Injectable()
 export class AuthService {
 	constructor(
-		private jwt: JwtService,
-		private userService: UserService,
-		private emailService: EmailService,
-		private prisma: PrismaService
+		private readonly jwt: JwtService,
+		private readonly userService: UserService,
+		private readonly emailService: EmailService,
+		private readonly prisma: PrismaService,
+		private readonly configService: ConfigService
 	) {}
 
 	private readonly TOKEN_EXPIRATION_ACCESS = '1h'
@@ -46,7 +47,7 @@ export class AuthService {
 
 		await this.emailService.sendVerification(
 			user.email,
-			`http://localhost:4200/verify-email?token=${user.verificationToken}`
+			`${this.configService.get('SERVER_URL')}/verify-email?token=${user.verificationToken}`
 		)
 
 		return this.buildResponseObject(user)
@@ -108,9 +109,5 @@ export class AuthService {
 			throw new UnauthorizedException('Email or password invalid')
 		}
 		return user
-	}
-
-	private omitPassword(user: User) {
-		return omit(user, ['password'])
 	}
 }
