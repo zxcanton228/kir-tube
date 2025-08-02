@@ -13,7 +13,7 @@ import {
 	ValidationPipe
 } from '@nestjs/common'
 import { Recaptcha } from '@nestlab/google-recaptcha'
-import { Request, Response } from 'express'
+import type { Request, Response } from 'express'
 import { AuthService } from './auth.service'
 import { AuthDto } from './dto/auth.dto'
 import { RefreshTokenService } from './refresh-token.service'
@@ -21,8 +21,8 @@ import { RefreshTokenService } from './refresh-token.service'
 @Controller()
 export class AuthController {
 	constructor(
-		private readonly authService: AuthService,
-		private readonly refreshTokenService: RefreshTokenService
+		private readonly refreshTokenService: RefreshTokenService,
+		private readonly authService: AuthService
 	) {}
 
 	@UsePipes(new ValidationPipe())

@@ -6,8 +6,8 @@ import type { FC } from 'react'
 import { commentService } from 'src/services/comment.service'
 import type { ISingleVideoResponse } from 'src/types/video.types'
 
-import { Heading } from 'ui/Heading'
 import { SkeletonLoader } from 'ui/SkeletonLoader'
+import { Heading } from 'ui/heading/Heading'
 
 import { CommentItem } from './CommentItem'
 
@@ -25,8 +25,9 @@ export const Comments: FC<Props> = ({ video: { publicId, id, comments } }) => {
 		queryFn: () => commentService.byVideoPublicId(publicId),
 		initialData: comments
 	})
+
 	return (
-		<div className='border-t border-t-border pt-7 mt-7'>
+		<div className='border-t border-t-border pt-7 mt-7 comments'>
 			<Heading>{data.length} Comments</Heading>
 
 			<DynamicAddCommentsForm

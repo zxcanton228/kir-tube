@@ -1,0 +1,16 @@
+.video-item {
+	.video-thumbnail {
+		aspect-ratio: 16 / 9;
+		object-fit: cover;
+	}
+}
+.horizontal-video-item > div {
+	@media screen and (width <= 1150px) {
+		width: 100%;
+		display: flex;
+		flex-direction: column;
+		img {
+			width: 100%;
+		}
+	}
+}

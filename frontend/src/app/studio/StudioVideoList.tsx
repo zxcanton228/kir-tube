@@ -3,8 +3,8 @@
 import { Video } from 'lucide-react'
 import dynamic from 'next/dynamic'
 
-import { Heading } from 'ui/Heading'
 import { SkeletonLoader } from 'ui/SkeletonLoader'
+import { Heading } from 'ui/heading/Heading'
 
 const DynamicExplore = dynamic(() => import('./StudioVideoListSection').then(mod => mod.StudioVideoListSection), {
 	ssr: false,

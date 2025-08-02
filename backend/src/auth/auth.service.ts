@@ -16,11 +16,11 @@ import { AuthDto } from './dto/auth.dto'
 @Injectable()
 export class AuthService {
 	constructor(
-		private readonly jwt: JwtService,
-		private readonly userService: UserService,
+		private readonly configService: ConfigService,
 		private readonly emailService: EmailService,
+		private readonly userService: UserService,
 		private readonly prisma: PrismaService,
-		private readonly configService: ConfigService
+		private readonly jwt: JwtService
 	) {}
 
 	private readonly TOKEN_EXPIRATION_ACCESS = '1h'
@@ -101,13 +101,11 @@ export class AuthService {
 		const user = await this.prisma.user.findUnique({
 			where: { email: dto.email }
 		})
-		if (!user) {
-			throw new UnauthorizedException('Email or password invalid')
-		}
+		if (!user) throw new UnauthorizedException('Email or password invalid')
+
 		const isValid = await verify(user.password, dto.password)
-		if (!isValid) {
-			throw new UnauthorizedException('Email or password invalid')
-		}
+		if (!isValid) throw new UnauthorizedException('Email or password invalid')
+
 		return user
 	}
 }

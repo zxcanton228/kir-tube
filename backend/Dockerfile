@@ -1,18 +1,35 @@
-FROM oven/bun:alpine AS builder
+# Build
+FROM oven/bun:1.2.8 AS build
 
 WORKDIR /app
 
-COPY package*.json bun.lockb dist ./
-COPY prisma ./prisma
+COPY package.json bun.lock ./
 
-RUN bun install --frozen-lockfile
-RUN bun prisma generate
+RUN --mount=type=cache,target=/root/.bun bun install --frozen-lockfile
 
 COPY . .
 
-RUN apk update && \
-    apk add --no-cache ffmpeg && \
-    rm -rf /var/cache/apk/*
+RUN bun prisma generate
+RUN bun run build
+
+# Production
+FROM oven/bun:1.2.8 AS production
+
+WORKDIR /app
+
+RUN apt-get update \
+ && DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends \
+      ffmpeg \
+ && rm -rf /var/lib/apt/lists/*
+
+
+COPY --from=build /app/dist ./dist
+COPY --from=build /app/prisma ./prisma
+COPY --from=build /app/emails ./emails
+COPY --from=build /app/uploads ./uploads
+COPY --from=build /app/.env.production /app/package.json /app/tsconfig.json /app/tsconfig-paths-bootstrap.js /app/bun.lock ./
+
+RUN --mount=type=cache,target=/root/.bun bun install --frozen-lockfile --production
 
 EXPOSE 4200
-CMD ["bun", "run", "prod"]
+CMD ["bun", "run", "start:prod"]

@@ -8,7 +8,7 @@ import { useUpload } from './useUpload'
 interface Props {
 	folder?: string
 	value?: string
-	// eslint-disable-next-line
+
 	onChange: (url: string) => void
 	label: string
 	error?: FieldError
@@ -20,15 +20,15 @@ interface Props {
 }
 
 export const UploadField: FC<Props> = ({
-	label,
-	onChange,
+	sizePreview = [100, 100],
+	isImage = true,
 	className,
+	onChange,
+	overlay,
 	error,
 	folder,
-	isImage = true,
 	value,
-	overlay,
-	sizePreview = [100, 100]
+	label
 }) => {
 	const { isLoading, uploadFile } = useUpload({ onChange, folder })
 	const inputId = useId()
@@ -49,11 +49,11 @@ export const UploadField: FC<Props> = ({
 				<UploadCloud className='mr-2' /> Upload
 			</label>
 			<input
+				onChange={uploadFile}
+				className='hidden'
+				accept='image/*'
 				id={inputId}
 				type='file'
-				onChange={uploadFile}
-				accept='image/*'
-				className='hidden'
 			/>
 			{error && <p className='text-red-500 text-sm mt-1'>{error.message}</p>}
 			{isImage && (

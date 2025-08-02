@@ -12,6 +12,8 @@ import { processHtmlContent } from 'src/utils/process-html-content'
 
 import { StudioActions } from './StudioActions'
 
+import './StudioVideoItem.scss'
+
 interface Props {
 	video: IFullVideo
 }
@@ -20,7 +22,7 @@ export function StudioVideoItem({ video }: Props) {
 	const { initialContent } = processHtmlContent(video.description, 1)
 
 	return (
-		<div className='grid grid-cols-[.49fr_1.1fr_0.3fr_0.3fr_0.3fr_0.2fr_0.5fr] gap-6 mb-6 border-b border-b-border pb-6 last:border-none'>
+		<article className='studio-video-item grid grid-cols-[.49fr_1.1fr_0.3fr_0.3fr_0.3fr_0.2fr_0.5fr] gap-6 mb-6 border-b border-b-border pb-6 last:border-none'>
 			<Link
 				href={PAGE.VIDEO(video.publicId)}
 				target='_blank'
@@ -31,7 +33,7 @@ export function StudioVideoItem({ video }: Props) {
 					width={206}
 					height={116}
 					alt={video.title}
-					className='rounded-md'
+					className='rounded-md asp'
 				/>
 			</Link>
 
@@ -64,6 +66,6 @@ export function StudioVideoItem({ video }: Props) {
 			</div>
 
 			<StudioActions video={video} />
-		</div>
+		</article>
 	)
 }

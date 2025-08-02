@@ -5,8 +5,8 @@ import { Search } from 'lucide-react'
 import { useSearchParams } from 'next/navigation'
 import { videoService } from 'src/services/video.service'
 
-import { Heading } from 'ui/Heading'
 import { SkeletonLoader } from 'ui/SkeletonLoader'
+import { Heading } from 'ui/heading/Heading'
 import { VideoItem } from 'ui/video-item/VideoItem'
 
 export function SearchPage() {

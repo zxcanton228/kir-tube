@@ -11,7 +11,7 @@ import {
 	UsePipes
 } from '@nestjs/common'
 import { FilesInterceptor } from '@nestjs/platform-express'
-import { IFile } from './media.interface'
+import type { IFile } from './media.interface'
 import { MediaService } from './media.service'
 import { FileValidationPipe } from './pipes/file.validation.pipe'
 import { FolderValidationPipe } from './pipes/folder.validation.pipe'

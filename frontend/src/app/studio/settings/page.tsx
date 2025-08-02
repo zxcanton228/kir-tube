@@ -3,7 +3,7 @@ import type { Metadata } from 'next'
 
 import { NO_INDEX_PAGE } from 'src/constants/seo.constants'
 
-import { Heading } from 'ui/Heading'
+import { Heading } from 'ui/heading/Heading'
 
 import { SettingsForm } from './SettingsForm'
 

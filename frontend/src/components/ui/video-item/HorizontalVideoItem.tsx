@@ -12,6 +12,8 @@ import { transformDate } from 'src/utils/transform-date'
 import { VideoChannelName } from './VideoChannelName'
 import { VideoItemTitle } from './VideoItemTitle'
 
+import './VideoItem.scss'
+
 type Props = {
 	video: IVideo
 }
@@ -23,13 +25,11 @@ export const HorizontalVideoItem: FC<Props> = ({ video }) => (
 			y: -5
 		}}
 		transition={{
-			// пружина
 			type: 'spring',
-			// жесткость
 			stiffness: 500,
-			// демпфирование
 			damping: 30
 		}}
+		className='horizontal-video-item'
 	>
 		<div className='flex items-stretch gap-4 '>
 			<Link
@@ -37,13 +37,13 @@ export const HorizontalVideoItem: FC<Props> = ({ video }) => (
 				className='flex-shrink-0'
 			>
 				<Image
-					src={video.thumbnailUrl}
-					width={206}
-					height={115}
-					alt={video.title}
-					className='rounded-md'
-					quality={60}
 					sizes='(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw'
+					className='rounded-md asp'
+					src={video.thumbnailUrl}
+					alt={video.title}
+					height={115}
+					quality={60}
+					width={206}
 				/>
 			</Link>
 			<div className='flex flex-col justify-between'>

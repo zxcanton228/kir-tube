@@ -4,8 +4,8 @@ import { Heart } from 'lucide-react'
 
 import { useProfile } from 'src/hooks/useProfile'
 
-import { Heading } from 'ui/Heading'
 import { SkeletonLoader } from 'ui/SkeletonLoader'
+import { Heading } from 'ui/heading/Heading'
 import { HorizontalVideoItem } from 'ui/video-item/HorizontalVideoItem'
 
 export function LikedVideosPage() {

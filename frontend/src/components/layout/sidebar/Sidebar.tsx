@@ -1,5 +1,6 @@
 import dynamic from 'next/dynamic'
 import { usePathname } from 'next/navigation'
+import type { FC } from 'react'
 
 import { STUDIO_PAGE } from 'src/config/studio-page.config'
 
@@ -14,11 +15,13 @@ const DynamicLogout = dynamic(() => import('./Logout').then(mod => mod.Logout), 
 	loading: () => <SkeletonLoader className='w-5/6 h-10 mt-2' />
 })
 
-export const Sidebar = ({ toggleSidebar, isShowedSidebar }: { toggleSidebar: () => void; isShowedSidebar: boolean }) => {
+type Props = { toggleSidebar: () => void; isShowedSidebar: boolean }
+
+export const Sidebar: FC<Props> = ({ toggleSidebar, isShowedSidebar }) => {
 	const pathname = usePathname()
 
 	return (
-		<aside className='relative z-[1] p-layout border-r border-border whitespace-nowrap overflow-hidden'>
+		<aside className={'relative z-[1] p-layout border-r border-border whitespace-nowrap overflow-hidden sidebar'}>
 			<SidebarHeader toggleSidebar={toggleSidebar} />
 			<SidebarMenu
 				menu={SIDEBAR_DATA}

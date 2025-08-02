@@ -7,5 +7,5 @@ Dockerfile
 .DS_Store
 .idea
 
-.env.development
-.env.tests
+# .env*
+!.env.production

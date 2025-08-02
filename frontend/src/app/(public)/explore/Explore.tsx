@@ -22,23 +22,27 @@ export const Explore = () => {
 			return page < totalPages ? { page: page + 1, excludeIds: allVideos } : undefined
 		}
 	})
+
 	useEffectScroll({ fetchNextPage, hasNextPage, isFetchingNextPage })
+
 	const allVideos = data?.pages.flatMap(({ videos }) => videos) || []
 
 	return (
-		<section className='grid-6-cols pb-5'>
+		<section className='videos-grid pb-5'>
 			{isLoading && !allVideos.length ? (
 				<SkeletonLoader
 					count={6}
 					className='h-36 rounded-md'
 				/>
-			) : (
+			) : !!allVideos.length ? (
 				allVideos.map(video => (
 					<VideoItem
 						key={video.id}
 						video={video}
 					/>
 				))
+			) : (
+				<h1 className='text-center'>Sign in to view recommendations </h1>
 			)}
 
 			{isFetchingNextPage && (

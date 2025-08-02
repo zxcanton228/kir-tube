@@ -6,14 +6,14 @@ import * as ffmpeg from 'fluent-ffmpeg'
 import { ensureDir, writeFile } from 'fs-extra'
 import * as path from 'path'
 import { generateFilename } from './generate-filename'
-import { IFile, IMediaResponse } from './media.interface'
-import { IResolution, RESOLUTIONS } from './resolution.data'
+import type { IFile, IMediaResponse } from './media.interface'
+import { type IResolution, RESOLUTIONS } from './resolution.data'
 
 @Injectable()
 export class MediaService {
 	private readonly _outputDir = path.join(appRootPath, 'uploads')
 
-	private processingStatus: Map<string, number> = new Map()
+	private _processingStatus: Map<string, number> = new Map()
 
 	async saveMedia(
 		files: IFile[],
@@ -36,14 +36,14 @@ export class MediaService {
 
 			const maxResolution = this.mapResolution(inputWidth, inputHeight)
 
-			this.processingStatus.set(uniqueFileName, 0)
+			this._processingStatus.set(uniqueFileName, 0)
 
 			this.processVideo(filePath, uniqueFileName, folderLowerCase)
 				.then(() => {
-					this.processingStatus.set(uniqueFileName, 100)
+					this._processingStatus.set(uniqueFileName, 100)
 				})
 				.catch(err => {
-					this.processingStatus.set(uniqueFileName, -1)
+					this._processingStatus.set(uniqueFileName, -1)
 					console.error('Ошибка при обработке видео:', err)
 				})
 
@@ -99,9 +99,9 @@ export class MediaService {
 				)
 			}
 
-			this.processingStatus.set(fileName, 100)
+			this._processingStatus.set(fileName, 100)
 		} catch (err) {
-			this.processingStatus.set(fileName, -1)
+			this._processingStatus.set(fileName, -1)
 			console.error('Ошибка при обработке видео:', err)
 		}
 	}
@@ -154,7 +154,7 @@ export class MediaService {
 					const overallProgress =
 						((currentResolutionIndex + percent / 100) / totalResolutions) * 100
 
-					this.processingStatus.set(fileName, overallProgress)
+					this._processingStatus.set(fileName, overallProgress)
 				})
 				.on('end', () => {
 					resolve()
@@ -167,7 +167,7 @@ export class MediaService {
 	}
 
 	getProcessingStatus(fileName: string): number {
-		return this.processingStatus.get(fileName) || 0
+		return this._processingStatus.get(fileName) || 0
 	}
 
 	private mapResolution(width: number, height: number): EnumVideoPlayerQuality {

@@ -2,6 +2,7 @@
 
 import { useInfiniteQuery } from '@tanstack/react-query'
 import { studioVideoService } from 'src/services/studio/studio-video.service'
+import type { IFullVideo } from 'src/types/video.types'
 
 import { useEffectScroll } from 'src/hooks/useEffectScroll'
 
@@ -32,9 +33,8 @@ export const StudioVideoListSection = () => {
 			) : (
 				allVideos.map(video => (
 					<StudioVideoItem
+						video={video as IFullVideo}
 						key={video.id}
-						// @ts-ignore
-						video={video}
 					/>
 				))
 			)}

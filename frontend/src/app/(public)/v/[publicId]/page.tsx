@@ -2,6 +2,8 @@ import type { Metadata } from 'next'
 import { videoService } from 'src/services/video.service'
 import type { TPagePublicIdProp } from 'src/types/page.types'
 
+import { PAGE } from 'src/config/public-page.config'
+
 import { stripHtml } from 'src/utils/strip-html'
 
 import { SingleVideo } from './SingleVideo'
@@ -21,9 +23,14 @@ export async function generateMetadata({ params }: TPagePublicIdProp): Promise<M
 	return {
 		title: video.title,
 		description: stripHtml(video.description).slice(0, 150),
+		alternates: {
+			canonical: PAGE.VIDEO(video.id)
+		},
 		openGraph: {
 			type: 'video.other',
-			images: [video.thumbnailUrl]
+			images: [video.thumbnailUrl],
+			url: PAGE.VIDEO(video.id),
+			videos: video.videoFileName
 		}
 	}
 }

@@ -5,26 +5,14 @@ import type { TPageSlugProp } from 'src/types/page.types'
 
 import { SubscribeButton } from 'src/components/SubscribeButton'
 
-import { SITE_URL } from 'src/constants/constants'
+import { PAGE } from 'src/config/public-page.config'
 
 import { transformCount } from 'src/utils/transform-count'
 
-import { Heading } from 'ui/Heading'
 import { VerifiedBadge } from 'ui/VerifiedBadge'
+import { Heading } from 'ui/heading/Heading'
 
 import { ChannelVideos } from './ChannelVideos'
-
-// const DynamicSubscribeButton = d(() => import('src/components/SubscribeButton').then(mod => mod.SubscribeButton), {
-// 	ssr: false,
-// 	loading: () => (
-// 		<div className='grid grid-cols-6 gap-6'>
-// 			<SkeletonLoader
-// 				count={1}
-// 				className='w-36 h-11  rounded-md'
-// 			/>
-// 		</div>
-// 	)
-// })
 
 export const revalidate = 100
 
@@ -34,12 +22,13 @@ export async function generateMetadata({ params }: TPageSlugProp): Promise<Metad
 	return {
 		title: channel.user.name,
 		description: channel.description,
+		alternates: { canonical: PAGE.CHANNEL(channel.id) },
 		openGraph: {
 			type: 'profile',
 			title: channel.user.name,
 			description: channel.description,
 			images: [channel.avatarUrl],
-			url: `${SITE_URL}/c/${channel.slug}`
+			url: PAGE.CHANNEL(channel.id)
 		}
 	}
 }
@@ -60,25 +49,30 @@ export default async function ChannelPage({ params }: TPageSlugProp) {
 		<section>
 			<div>
 				<div className='relative w-full h-[250px] rounded-3xl overflow-hidden'>
-					<Image
-						alt={channel.user.name || ''}
-						src={channel.bannerUrl}
-						layout='fill'
-						style={{ objectFit: 'cover' }}
-						quality={100}
-						priority
-					/>
+					{!!channel.bannerUrl ? (
+						<Image
+							alt={channel.user.name || ''}
+							className='object-cover'
+							src={channel.bannerUrl}
+							layout='fill'
+							quality={100}
+							priority
+						/>
+					) : (
+						<div className='bg-border w-full h-full' />
+					)}
 				</div>
 				<div className='flex items-start gap-5 mt-7 mb-10 w-3/4'>
 					<Image
-						alt={channel.slug}
-						src={channel.avatarUrl}
-						width={162}
-						height={162}
+						src={channel.avatarUrl || '/images/avatar.png'}
 						className='rounded-xl flex-shrink-0'
+						alt={channel.slug}
 						quality={100}
+						height={162}
+						width={162}
 						priority
 					/>
+
 					<div>
 						<Heading
 							className='mb-2 '

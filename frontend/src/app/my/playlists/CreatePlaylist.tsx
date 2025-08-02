@@ -9,10 +9,10 @@ import { useHotkeys } from 'react-hotkeys-hook'
 import { playlistService } from 'src/services/playlist.service'
 import type { IPlaylistData } from 'src/types/playlist.types'
 
-import { Heading } from 'ui/Heading'
 import { SkeletonLoader } from 'ui/SkeletonLoader'
 import { Button } from 'ui/button/Button'
 import { Field } from 'ui/field/Field'
+import { Heading } from 'ui/heading/Heading'
 
 type Props = { refetch: () => void; onClose: () => void; ref: RefObject<any | null> }
 export const CreatePlaylist: FC<Props> = ({ refetch, onClose, ref }) => {

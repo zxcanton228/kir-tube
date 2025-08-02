@@ -7,7 +7,7 @@ import { authService } from 'src/services/auth.service'
 import { Content } from './content/Content'
 import { Sidebar } from './sidebar/Sidebar'
 
-import styles from './Layout.module.scss'
+import './Layout.scss'
 
 export function Layout({ children }: PropsWithChildren<unknown>) {
 	const [isShowedSidebar, setIsShowedSidebar] = useState<boolean>(true)
@@ -20,13 +20,7 @@ export function Layout({ children }: PropsWithChildren<unknown>) {
 	}, [])
 
 	return (
-		<main
-			className={cn(
-				'flex min-h-screen',
-				styles.initialSidebar,
-				isShowedSidebar ? styles.showedSidebar : styles.hidedSidebar
-			)}
-		>
+		<main className={cn('flex min-h-screen initialSidebar', isShowedSidebar ? 'showedSidebar' : 'hidedSidebar')}>
 			<Sidebar
 				isShowedSidebar={isShowedSidebar}
 				toggleSidebar={toggleSidebar}

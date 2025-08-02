@@ -36,7 +36,7 @@ class AuthService {
 			}
 
 			return response
-		} catch (error) {
+		} catch {
 			return null
 		}
 	}

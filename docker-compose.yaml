@@ -1,52 +1,50 @@
+name: next-intensive
 services:
-  nest:
-    container_name: nest
+  backend:
     build:
       context: ./backend
-      dockerfile: Dockerfile
+    env_file:
+      - path: ./backend/.env.production
     ports:
       - 4200:4200
     depends_on:
-      - db
-    env_file:
-      - ./backend/.env
-    volumes:
-      - ./backend/uploads:/app/uploads # Добавьте этот том в сервис nest
+      - database
 
-  db:
-    container_name: db
-    restart: always
+  database:
     image: postgres:alpine
-    env_file:
-      - ./backend/.env
-    volumes:
-      - postgres-data:/var/lib/postgresql/data
     ports:
-      - '5432:5432'
-  nextjs:
+      - 5432:5432
+    env_file:
+      - ./backend/.env.production
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+  frontend:
+    # image: ${FRONTEND_IMAGE}
     build:
       context: ./frontend
-      dockerfile: Dockerfile
     ports:
       - '3000:3000'
-    environment:
+
+    restart: always
+    env_file:
       - ./frontend/.env
-    volumes:
-      - nextjs-node-modules:/app/node_modules
-      - nextjs-build:/app/.next
+    depends_on:
+      - backend
 
   nginx:
-    image: nginx:alpine
+    build:
+      context: ./.nginx/
     restart: unless-stopped
     ports:
       - 80:80
+      - 443:443
     volumes:
       - ./.nginx/nginx.conf:/etc/nginx/nginx.conf
+      - ./.nginx/letsencrypt/:/etc/letsencrypt/
     depends_on:
-      - nextjs
+      - frontend
+      - backend
 
 volumes:
-  postgres-data:
-  uploads:
-  nextjs-node-modules:
-  nextjs-build:
+  postgres_data:

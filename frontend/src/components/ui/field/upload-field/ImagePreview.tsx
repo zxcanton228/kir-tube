@@ -28,22 +28,22 @@ export const ImagePreview: FC<Props> = ({ isLoading, overlay, value, sizePreview
 					<div className='relative'>
 						{!!overlay && (
 							<Image
-								alt='Overlay'
 								className='rounded-md absolute top-0 left-0 w-full h-full'
+								height={height}
+								alt='Overlay'
 								src={overlay}
 								width={width}
-								height={height}
 								quality={90}
 								priority
 							/>
 						)}
 						<Image
+							className='rounded-md asp'
 							alt='Uploaded file'
-							className='rounded-md'
-							src={value}
-							width={width}
 							height={height}
 							quality={90}
+							width={width}
+							src={value}
 							priority
 						/>
 					</div>

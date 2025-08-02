@@ -20,7 +20,7 @@ export function VideoPlayer({ fileName, toggleTheaterMode, maxResolution }: Prop
 	const { fn, playerRef, bgRef, state } = useVideoPlayer(fileName, toggleTheaterMode)
 
 	return (
-		<div className='relative rounded-2xl mb-5'>
+		<div className='relative max-w-full rounded-2xl mb-5'>
 			{state.isLightingMode && (
 				<video
 					ref={bgRef}
@@ -39,7 +39,7 @@ export function VideoPlayer({ fileName, toggleTheaterMode, maxResolution }: Prop
 				onClick={fn.togglePlayPause}
 			/>
 
-			<div className='grid grid-cols-[7fr_1fr] gap-7 absolute bottom-5 left-5 right-5 z-[1]'>
+			<div className='grid grid-cols-[7fr_1fr] gap-7 absolute bottom-5 left-5 right-5 z-[1] shrink-1'>
 				<div className='flex items-center gap-6'>
 					<button
 						onClick={fn.togglePlayPause}

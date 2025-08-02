@@ -2,7 +2,7 @@ import { type NextRequest, NextResponse } from 'next/server'
 
 import { PAGE } from 'src/config/public-page.config'
 
-import { getTokensFromRequest } from './utils/get-tokents-from-request'
+import { getTokensFromRequest } from './utils/get-tokens-from-request'
 import { jwtVerifyServer } from './utils/jwt-verify'
 import { nextRedirect } from './utils/next-redirect'
 

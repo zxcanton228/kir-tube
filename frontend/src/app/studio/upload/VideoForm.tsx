@@ -3,8 +3,6 @@ import type { FC } from 'react'
 import { Controller, type UseFormReturn } from 'react-hook-form'
 import type { IVideoFormData } from 'src/types/studio-video.types'
 
-import { stripHtmlWithBreak } from 'src/utils/strip-html'
-
 import { Field } from 'ui/field/Field'
 import { Textarea } from 'ui/field/Textarea'
 import { TagsField } from 'ui/field/tags-field/TagsField'
@@ -12,7 +10,7 @@ import { UploadField } from 'ui/field/upload-field/UploadField'
 
 import { UploadSkeleton } from './UploadSkeleton'
 
-type Props = { isPending?: boolean; form: UseFormReturn<IVideoFormData, any, undefined> }
+type Props = { isPending?: boolean; form: UseFormReturn<IVideoFormData> }
 export const VideoForm: FC<Props> = ({
 	isPending,
 	form: {
@@ -36,33 +34,25 @@ export const VideoForm: FC<Props> = ({
 						placeholder='Enter title:'
 					/>
 
-					<Controller
-						control={control}
-						name='description'
-						render={({ field: { onChange, value }, fieldState: { error } }) => (
-							<Textarea
-								label='Description'
-								value={stripHtmlWithBreak(value || '')}
-								onChange={e => onChange(e.target.value)}
-								error={error?.message}
-								placeholder='Enter description:'
-								rows={7}
-							/>
-						)}
+					<Textarea
+						registration={register('description')}
+						error={errors?.description?.message}
+						placeholder='Enter description:'
+						label='Description'
+						rows={7}
 					/>
-
 					<Controller
 						control={control}
 						name='thumbnailUrl'
 						render={({ field: { onChange, value }, fieldState: { error } }) => (
 							<UploadField
-								label='Thumbnail:'
+								sizePreview={[151, 82]}
 								onChange={onChange}
+								folder='thumbnails'
+								label='Thumbnail:'
+								className='mb-5'
 								value={value}
 								error={error}
-								folder='thumbnails'
-								className='mb-5'
-								sizePreview={[151, 82]}
 							/>
 						)}
 					/>
@@ -85,11 +75,11 @@ export const VideoForm: FC<Props> = ({
 					<div className='bg-gray-700 rounded-md overflow-hidden'>
 						{watch('thumbnailUrl') ? (
 							<Image
-								alt='Uploaded thumbnail'
 								src={watch('thumbnailUrl')}
+								alt='Uploaded thumbnail'
+								className='w-full asp'
 								width={249}
 								height={140}
-								className='w-full'
 							/>
 						) : (
 							<div className='w-[249] h-[140] bg-gray-900 font-medium text-sm flex items-center justify-center'>

@@ -11,8 +11,8 @@ import type { IVideoFormData } from 'src/types/studio-video.types'
 
 import { STUDIO_PAGE } from 'src/config/studio-page.config'
 
-import { Heading } from 'ui/Heading'
 import { Button } from 'ui/button/Button'
+import { Heading } from 'ui/heading/Heading'
 
 export function EditVideoForm() {
 	const { id } = useParams()

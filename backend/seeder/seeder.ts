@@ -80,8 +80,8 @@ async function main() {
 				maxResolution: videoData.maxResolution,
 				viewsCount: videoData.viewsCount || 0,
 				isPublic: videoData.isPublic || false,
-				channelId: channelId,
-				createdAt: createdAt,
+				channelId,
+				createdAt,
 				tags: {
 					connectOrCreate: videoData.tags?.map(tagName => ({
 						where: { name: tagName },
@@ -143,14 +143,15 @@ async function main() {
 		}
 	}
 	console.log('Видео, комментарии, лайки и теги созданы.')
-
-	console.log('Заполнение базы данных завершено успешно.')
 }
 
 main()
 	.catch(e => {
 		console.error('Ошибка при заполнении базы данных:', e)
 		process.exit(1)
+	})
+	.then(() => {
+			console.log('Заполнение базы данных завершено успешно.')
 	})
 	.finally(async () => {
 		await prisma.$disconnect()

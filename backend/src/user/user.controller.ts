@@ -9,7 +9,7 @@ import {
 } from '@nestjs/common'
 import { Auth } from 'src/auth/decorators/auth.decorator'
 
-import { User } from '@prisma/client'
+import type { User } from '@prisma/client'
 import { CurrentUser } from './decorators/user.decorator'
 import { UpdateUserDto } from './dto/update-user.dto'
 import { UserService } from './user.service'

@@ -31,12 +31,12 @@ export function PlaylistItem({ playlist }: Props) {
 					<div className='rounded-lg shadow-lg absolute w-11/12 h-full left-[4.1%] -top-1.5 bg-[#9294a1]' />
 					{!!playlist.videos[0]?.thumbnailUrl ? (
 						<Image
+							className='rounded-lg shadow-lg relative asp w-full'
 							src={playlist.videos[0]?.thumbnailUrl}
-							width={290}
-							height={163}
 							alt={playlist.title}
 							quality={100}
-							className='rounded-lg shadow-lg relative'
+							height={163}
+							width={290}
 						/>
 					) : (
 						<div className='w-[290] h-[163] rounded-lg shadow-lg relative' />

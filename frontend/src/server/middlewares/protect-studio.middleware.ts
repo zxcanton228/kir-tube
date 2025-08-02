@@ -2,7 +2,7 @@ import { type NextRequest, NextResponse } from 'next/server'
 
 import { STUDIO_PAGE } from 'src/config/studio-page.config'
 
-import { getTokensFromRequest } from './utils/get-tokents-from-request'
+import { getTokensFromRequest } from './utils/get-tokens-from-request'
 import { jwtVerifyServer } from './utils/jwt-verify'
 import { redirectToLogin } from './utils/redirect-to-login'
 

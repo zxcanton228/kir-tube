@@ -12,8 +12,8 @@ import { useAuth } from 'src/hooks/useAuth'
 
 import { transformDate } from 'src/utils/transform-date'
 
-import { Heading } from 'ui/Heading'
 import { VerifiedBadge } from 'ui/VerifiedBadge'
+import { Heading } from 'ui/heading/Heading'
 
 import getInitials from './get-initials'
 

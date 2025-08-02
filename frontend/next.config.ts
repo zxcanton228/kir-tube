@@ -1,15 +1,8 @@
 import type { NextConfig } from 'next'
 
-// type TProtocol = 'https' | 'http'
 const nextConfig: NextConfig = {
 	reactStrictMode: true,
 	poweredByHeader: false,
-	sassOptions: {
-		silenceDeprecations: ['legacy-js-api']
-	},
-	devIndicators: {
-		appIsrStatus: false
-	},
 
 	rewrites: async () => [
 		{

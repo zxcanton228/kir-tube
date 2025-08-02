@@ -4,11 +4,12 @@ import { videoService } from 'src/services/video.service'
 
 import { PAGE } from 'src/config/public-page.config'
 
-import { Heading } from 'ui/Heading'
+import { Heading } from 'ui/heading/Heading'
 import { VideoItem } from 'ui/video-item/VideoItem'
 
 import { ExploreSection } from './explore/ExploreSection'
 
+// import './MainPage.scss'
 export const revalidate = 100
 
 export const metadata: Metadata = {
@@ -20,19 +21,21 @@ export const metadata: Metadata = {
 	openGraph: {
 		title: 'Home',
 		description: 'Home',
-		type: 'website'
+		type: 'website',
+		images: ['/images/512.png'],
+		url: PAGE.HOME
 	}
 }
 
 export default async function Home() {
-	const videos = (await videoService.getTrendingVideos()).data
+	const { data: videos } = await videoService.getTrendingVideos()
 
 	return (
-		<section>
+		<div>
 			{!!videos.length && (
 				<section className='mb-10'>
 					<Heading Icon={Flame}>Trending</Heading>
-					<div className='grid-6-cols'>
+					<div className='videos-grid'>
 						{videos.map(video => (
 							<VideoItem
 								key={video.id}
@@ -44,6 +47,6 @@ export default async function Home() {
 				</section>
 			)}
 			<ExploreSection />
-		</section>
+		</div>
 	)
 }

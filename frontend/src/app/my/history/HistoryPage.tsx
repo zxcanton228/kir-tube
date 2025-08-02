@@ -4,10 +4,12 @@ import { useMutation, useQuery } from '@tanstack/react-query'
 import { History } from 'lucide-react'
 import { watchHistoryService } from 'src/services/watch-history.service'
 
-import { Heading } from 'ui/Heading'
 import { SkeletonLoader } from 'ui/SkeletonLoader'
 import { Button } from 'ui/button/Button'
+import { Heading } from 'ui/heading/Heading'
 import { HorizontalVideoItem } from 'ui/video-item/HorizontalVideoItem'
+
+import './HistoryPage.scss'
 
 export function HistoryPage() {
 	const { data, isLoading, refetch } = useQuery({
@@ -27,7 +29,7 @@ export function HistoryPage() {
 	const isHistoryEmpty = !data?.data?.length
 
 	return (
-		<div className='w-1/2'>
+		<div className='history-page w-1/2'>
 			<div className='flex items-center justify-between mb-10'>
 				<Heading
 					isPageHeading
@@ -39,9 +41,10 @@ export function HistoryPage() {
 
 				{!isHistoryEmpty && (
 					<Button
-						variant='simple'
-						isLoading={isPending}
 						onClick={() => mutate()}
+						className='text-nowrap'
+						isLoading={isPending}
+						variant='simple'
 					>
 						Clear history
 					</Button>

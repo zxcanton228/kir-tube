@@ -2,7 +2,7 @@ import { PrismaService } from '@/prisma.service'
 import { shuffle } from 'lodash'
 
 import { Injectable, NotFoundException } from '@nestjs/common'
-import { Prisma, Video, VideoTag } from '@prisma/client'
+import { Prisma, type Video, type VideoTag } from '@prisma/client'
 
 @Injectable()
 export class VideoService {

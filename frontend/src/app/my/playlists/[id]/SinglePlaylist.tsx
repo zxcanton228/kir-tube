@@ -5,8 +5,8 @@ import { ListVideo } from 'lucide-react'
 import { useParams } from 'next/navigation'
 import { playlistService } from 'src/services/playlist.service'
 
-import { Heading } from 'ui/Heading'
 import { SkeletonLoader } from 'ui/SkeletonLoader'
+import { Heading } from 'ui/heading/Heading'
 import { VideoItem } from 'ui/video-item/VideoItem'
 
 export function SinglePlaylist() {

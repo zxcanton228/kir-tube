@@ -4,7 +4,7 @@ import { videoService } from 'src/services/video.service'
 
 import { PAGE } from 'src/config/public-page.config'
 
-import { Heading } from 'ui/Heading'
+import { Heading } from 'ui/heading/Heading'
 import { VideoItem } from 'ui/video-item/VideoItem'
 
 export const revalidate = 100
@@ -28,7 +28,7 @@ export default async function PageVideoGames() {
 	return (
 		<section>
 			<Heading Icon={Gamepad2}>Video games</Heading>
-			<div className='grid-6-cols'>
+			<div className='videos-grid'>
 				{!!videos.length ? (
 					videos.map(video => (
 						<VideoItem

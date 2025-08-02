@@ -11,7 +11,7 @@ import { Button } from 'ui/button/Button'
 
 import { VideoForm } from './VideoForm'
 
-type Props = { form: UseFormReturn<IVideoFormData, any, undefined>; isReadyToPublish: boolean }
+type Props = { form: UseFormReturn<IVideoFormData>; isReadyToPublish: boolean }
 export const CreateVideoForm: FC<Props> = ({ form, isReadyToPublish }) => {
 	const router = useRouter()
 	const { mutate, isPending } = useMutation({

@@ -1,0 +1,9 @@
+.studio-video-item {
+	@media screen and (width <= 1000px) {
+		display: flex;
+		flex-direction: column;
+		img {
+			width: 100%;
+		}
+	}
+}

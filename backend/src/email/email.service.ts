@@ -7,13 +7,12 @@ import { render } from '@react-email/render'
 export class EmailService {
 	constructor(private readonly mailerService: MailerService) {}
 
-	sendEmail(to: string, subject: string, html: string) {
-		return this.mailerService.sendMail({
+	sendEmail = (to: string, subject: string, html: string) =>
+		this.mailerService.sendMail({
 			to,
 			subject,
 			html
 		})
-	}
 
 	async sendVerification(to: string, verificationLink: string) {
 		const html = await render(VerificationEmail({ url: verificationLink }))

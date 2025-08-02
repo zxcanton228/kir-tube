@@ -44,7 +44,7 @@ export const ProgressVideoProcessing: FC<Props> = ({ fileName, setIsReadyToPubli
 				}}
 			>
 				<div
-					className={`absolute inset-0 h-full bg-gradient-to-l from-gray-500 to-gray-600 ${!isReadyToPublish && 'animate-pulse'} transition-all`}
+					className={`absolute inset-0 h-full ${!isReadyToPublish ? 'animate-pulse bg-gradient-to-l from-gray-500 to-gray-600' : 'bg-primary'} transition-all`}
 					style={{
 						width: progress ? `${progress}%` : 0
 					}}

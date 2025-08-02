@@ -4,9 +4,9 @@ import { ListVideo } from 'lucide-react'
 
 import { useOutside } from 'src/hooks/useOutside'
 
-import { Heading } from 'ui/Heading'
 import { SkeletonLoader } from 'ui/SkeletonLoader'
 import { Button } from 'ui/button/Button'
+import { Heading } from 'ui/heading/Heading'
 
 import { CreatePlaylist } from './CreatePlaylist'
 import { PlaylistItem } from './PlaylistItem'

@@ -1,31 +1,36 @@
+import { isDev } from '@/utils/is-dev.util'
 import { Injectable } from '@nestjs/common'
-import type { Response } from 'express'
+import { ConfigService } from '@nestjs/config'
+import type { CookieOptions, Response } from 'express'
 
 @Injectable()
 export class RefreshTokenService {
-	readonly EXPIRE_DAY_REFRESH_TOKEN = 7
+	constructor(private readonly configService: ConfigService) {}
+	readonly EXPIRE_DAY_REFRESH_TOKEN = 1
 	readonly REFRESH_TOKEN_NAME = 'refreshToken'
 
-	addRefreshTokenToResponse(res: Response, refreshToken: string) {
-		const expiresIn = new Date()
-		expiresIn.setDate(expiresIn.getDate() + this.EXPIRE_DAY_REFRESH_TOKEN)
+	private readonly DOMAIN = () => this.configService.get<string>('DOMAIN')
+	private readonly _TOKEN_SETTINGS = (
+		expires = new Date(0)
+	): CookieOptions => ({
+		sameSite: isDev(this.configService) ? 'none' : 'lax',
+		domain: this.DOMAIN(),
+		httpOnly: true,
+		secure: true,
+		expires
+	})
+	public addRefreshTokenToResponse(res: Response, refreshToken: string) {
+		const expires = new Date()
+		expires.setDate(expires.getDate() + this.EXPIRE_DAY_REFRESH_TOKEN)
 
-		res.cookie(this.REFRESH_TOKEN_NAME, refreshToken, {
-			httpOnly: true,
-			domain: 'localhost',
-			expires: expiresIn,
-			secure: true, // true if production
-			sameSite: 'none' // lax if production
-		})
+		res.cookie(
+			this.REFRESH_TOKEN_NAME,
+			refreshToken,
+			this._TOKEN_SETTINGS(expires)
+		)
 	}
 
-	removeRefreshTokenFromResponse(res: Response) {
-		res.cookie(this.REFRESH_TOKEN_NAME, '', {
-			httpOnly: true,
-			domain: 'localhost',
-			expires: new Date(0),
-			secure: true, // true if production
-			sameSite: 'none' // lax if production
-		})
+	public removeRefreshTokenFromResponse(res: Response) {
+		res.cookie(this.REFRESH_TOKEN_NAME, '', this._TOKEN_SETTINGS())
 	}
 }

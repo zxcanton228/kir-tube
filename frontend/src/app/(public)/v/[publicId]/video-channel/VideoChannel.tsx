@@ -10,9 +10,9 @@ import { PAGE } from 'src/config/public-page.config'
 
 import { transformCount } from 'src/utils/transform-count'
 
-import { Heading } from 'ui/Heading'
 import { SkeletonLoader } from 'ui/SkeletonLoader'
 import { VerifiedBadge } from 'ui/VerifiedBadge'
+import { Heading } from 'ui/heading/Heading'
 
 const DynamicSubscribeButton = dynamic(() => import('src/components/SubscribeButton').then(mod => mod.SubscribeButton), {
 	ssr: false,

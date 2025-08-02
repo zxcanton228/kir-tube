@@ -1,7 +1,7 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query'
 import { Edit, ExternalLink, Trash2 } from 'lucide-react'
 import Link from 'next/link'
-import type { FC } from 'react'
+import { type FC, useCallback } from 'react'
 import toast, { type Toast } from 'react-hot-toast'
 import { studioVideoService } from 'src/services/studio/studio-video.service'
 import type { IVideo } from 'src/types/video.types'
@@ -24,7 +24,7 @@ export const StudioActions: FC<Props> = ({ video }) => {
 		}
 	})
 
-	const handleDelete = () => {
+	const handleDelete = useCallback(() => {
 		toast((t: Toast) => (
 			<div>
 				<p>Are you sure you want to delete this video?</p>
@@ -47,7 +47,7 @@ export const StudioActions: FC<Props> = ({ video }) => {
 				</div>
 			</div>
 		))
-	}
+	}, [deleteVideo])
 
 	return (
 		<div className='flex justify-center items-start gap-5'>

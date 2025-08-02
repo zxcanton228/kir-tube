@@ -1,5 +1,5 @@
 import { isDev } from '@/utils/is-dev.util'
-import { MailerOptions } from '@nestjs-modules/mailer'
+import type { MailerOptions } from '@nestjs-modules/mailer'
 import { ConfigService } from '@nestjs/config'
 
 export const getMailerConfig = async (

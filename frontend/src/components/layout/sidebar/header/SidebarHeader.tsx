@@ -5,8 +5,8 @@ import { Logo } from './Logo'
 export const SidebarHeader = ({ toggleSidebar }: { toggleSidebar: () => void }) => (
 	<div className='flex items-center gap-5 mb-12'>
 		<button
+			className='opacity-85 sidebar-burger hover:opacity-100 transition-opacity'
 			onClick={toggleSidebar}
-			className='opacity-85 hover:opacity-100 transition-opacity'
 			title='Toggle sidebar'
 		>
 			<Menu />

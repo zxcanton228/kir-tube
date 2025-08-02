@@ -1,9 +1,10 @@
-import type { Metadata } from 'next'
+import type { Metadata, Viewport } from 'next'
 import { Noto_Sans } from 'next/font/google'
 import type { ReactNode } from 'react'
 
 import { Providers } from 'src/providers/Providers'
 
+import { COLORS } from 'src/constants/colors.constants'
 import { SITE_URL } from 'src/constants/constants'
 import { SITE_NAME } from 'src/constants/seo.constants'
 
@@ -11,6 +12,10 @@ import './globals.scss'
 
 const notoSans = Noto_Sans({ subsets: ['latin'] })
 export const fetchCache = 'default-cache'
+
+export const viewport: Viewport = {
+	themeColor: COLORS.bg
+}
 export const metadata: Metadata = {
 	title: {
 		absolute: SITE_NAME,

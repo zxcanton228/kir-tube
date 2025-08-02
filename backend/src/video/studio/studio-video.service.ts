@@ -20,11 +20,11 @@ export class StudioVideoService {
 		})
 
 		return {
-			videos,
-			page,
-			limit,
+			totalPages: Math.ceil(totalCount / limit),
 			totalCount,
-			totalPages: Math.ceil(totalCount / limit)
+			videos,
+			limit,
+			page
 		}
 	}
 

@@ -49,22 +49,28 @@ export function SaveToPlaylist({ videoId }: Props) {
 						transition={{ duration: 0.3 }}
 					>
 						<ul className='bg-gray-800 py-2 px-3 rounded absolute bottom-8 right-0 shadow w-max max-w-32'>
-							{data?.data.map(playlist => (
-								<li
-									key={playlist.id}
-									className='mb-1 text-sm'
-								>
-									<button
-										onClick={() => {
-											togglePlaylist(playlist.id)
-										}}
-										className={'border-b border-b-transparent transition-colors hover:text-primary flex items-center gap-1'}
-										disabled={isPending}
+							{data && !!data.data.length ? (
+								data.data.map(playlist => (
+									<li
+										key={playlist.id}
+										className='mb-1 text-sm'
 									>
-										{playlist.videos.some(v => v.id === videoId) && <Check size={16} />} {playlist.title}
-									</button>
-								</li>
-							))}
+										<button
+											onClick={() => {
+												togglePlaylist(playlist.id)
+											}}
+											className={
+												'border-b border-b-transparent transition-colors hover:text-primary flex items-center gap-1'
+											}
+											disabled={isPending}
+										>
+											{playlist.videos.some(v => v.id === videoId) && <Check size={16} />} {playlist.title}
+										</button>
+									</li>
+								))
+							) : (
+								<p>No playlists</p>
+							)}
 						</ul>
 					</m.div>
 				)}

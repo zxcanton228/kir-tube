@@ -4,8 +4,8 @@ import { CalendarCheck } from 'lucide-react'
 
 import { useProfile } from 'src/hooks/useProfile'
 
-import { Heading } from 'ui/Heading'
 import { SkeletonLoader } from 'ui/SkeletonLoader'
+import { Heading } from 'ui/heading/Heading'
 import { VideoItem } from 'ui/video-item/VideoItem'
 
 export function SubscriptionsPage() {

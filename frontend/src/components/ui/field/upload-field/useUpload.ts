@@ -47,7 +47,7 @@ export const useUpload: TUseUpload = ({ onChange, folder, onError, onSuccess, ma
 
 			mutate(formData)
 		},
-		[mutate]
+		[mutate, maxFileSize]
 	)
 
 	return {
