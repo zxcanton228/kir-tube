@@ -9,7 +9,7 @@ import {
 } from '@nestjs/common'
 import { ConfigService } from '@nestjs/config'
 import { JwtService } from '@nestjs/jwt'
-import { User } from '@prisma/client'
+import type { User } from '@prisma/client'
 import { hash, verify } from 'argon2'
 import { AuthDto } from './dto/auth.dto'
 
@@ -31,24 +31,23 @@ export class AuthService {
 		return this.buildResponseObject(user)
 	}
 
-	async register(dto: AuthDto) {
+	async register({ password, ...dto }: AuthDto) {
 		const userExists = await this.prisma.user.findUnique({
 			where: { email: dto.email }
 		})
-		if (userExists) {
-			throw new BadRequestException('User already exists')
-		}
+		if (userExists) throw new BadRequestException('User already exists')
+
 		const user = await this.prisma.user.create({
 			data: {
 				...dto,
-				password: await hash(dto.password)
+				password: await hash(password)
 			}
 		})
 
-		await this.emailService.sendVerification(
-			user.email,
-			`${this.configService.get('SERVER_URL')}/verify-email?token=${user.verificationToken}`
-		)
+		// await this.emailService.sendVerification(
+		// 	user.email,
+		// 	`${this.configService.get('SERVER_URL')}/verify-email?token=${user.verificationToken}`
+		// )
 
 		return this.buildResponseObject(user)
 	}

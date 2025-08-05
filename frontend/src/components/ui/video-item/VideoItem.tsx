@@ -33,9 +33,8 @@ export const VideoItem: FC<Props> = ({ video, Icon, isImagePriority = false }) =
 					className='rounded-md w-full video-thumbnail'
 					src={video.thumbnailUrl}
 					alt={video.title}
-					width={306}
 					height={172}
-					quality={60}
+					width={306}
 				/>
 			</Link>
 			<Link

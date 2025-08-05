@@ -17,8 +17,7 @@ export const revalidate = 100
 
 export async function generateMetadata({ params }: TPagePublicIdProp): Promise<Metadata> {
 	const { publicId } = await params
-	const data = await videoService.byPublicId(publicId)
-	const video = data.data
+	const video = await videoService.byPublicId(publicId)
 
 	return {
 		title: video.title,
@@ -36,9 +35,7 @@ export async function generateMetadata({ params }: TPagePublicIdProp): Promise<M
 }
 
 export async function generateStaticParams() {
-	const {
-		data: { videos }
-	} = await videoService.getAll()
+	const { videos } = await videoService.getAll()
 
 	return videos.map(({ publicId }) => ({
 		publicId
@@ -47,6 +44,6 @@ export async function generateStaticParams() {
 
 export default async function VideoPage({ params }: TPagePublicIdProp) {
 	const { publicId } = await params
-	const { data: video } = await videoService.byPublicId(publicId)
+	const video = await videoService.byPublicId(publicId)
 	return <SingleVideo video={video} />
 }

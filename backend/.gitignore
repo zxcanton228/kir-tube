@@ -42,6 +42,7 @@ lerna-debug.log*
 # temp directory
 .temp
 .tmp
+clo.exe
 
 # Runtime data
 pids

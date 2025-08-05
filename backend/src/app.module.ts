@@ -8,6 +8,7 @@ import { EmailModule } from './email/email.module'
 import { ChannelModule } from './channel/channel.module'
 import { MediaModule } from './media/media.module'
 import { PlaylistModule } from './playlist/playlist.module'
+import { ResetDbModule } from './reset-db/reset-db.module'
 import { UserModule } from './user/user.module'
 import { VideoModule } from './video/video.module'
 import { WatchHistoryModule } from './watch-history/watch-history.module'
@@ -29,7 +30,8 @@ import { WatchHistoryModule } from './watch-history/watch-history.module'
 		VideoModule,
 		EmailModule,
 		WatchHistoryModule,
-		PlaylistModule
+		PlaylistModule,
+		ResetDbModule
 	]
 })
 export class AppModule {}

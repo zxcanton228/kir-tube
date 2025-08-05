@@ -7,20 +7,22 @@ import { axiosClassic } from 'src/api/axios'
 class VideoService {
 	private readonly _BASE_URL = '/videos'
 
-	public readonly getAll = async (searchTerm?: string | null): Promise<AxiosResponse<IVideosPagination>> =>
-		axiosClassic.get<IVideosPagination>(
+	public async getAll(searchTerm?: string | null): Promise<IVideosPagination> {
+		const { data } = await axiosClassic.get<IVideosPagination>(
 			this._BASE_URL,
 			searchTerm
 				? {
-						params: {
-							searchTerm
-						}
+						params: { searchTerm }
 					}
 				: {}
 		)
+		return data
+	}
 
-	public readonly byPublicId = async (publicId?: string | null): Promise<AxiosResponse<ISingleVideoResponse>> =>
-		axiosClassic.get<ISingleVideoResponse>(`${this._BASE_URL}/by-publicId/${publicId}`)
+	public async byPublicId(publicId?: string | null): Promise<ISingleVideoResponse> {
+		const { data } = await axiosClassic.get<ISingleVideoResponse>(`${this._BASE_URL}/by-publicId/${publicId}`)
+		return data
+	}
 
 	public readonly getTrendingVideos = async (): Promise<AxiosResponse<IVideo[]>> =>
 		axiosClassic.get<IVideo[]>(`${this._BASE_URL}/trending`)
