@@ -7,7 +7,7 @@ const nextConfig: NextConfig = {
 	rewrites: async () => [
 		{
 			source: '/uploads/:path*',
-			destination: `${process.env.NEXT_PUBLIC_SERVER_URL}/uploads/:path*`.replace('/api', '')
+			destination: process.env.NEXT_PUBLIC_SERVER_URL + '/uploads/:path*'
 		}
 	]
 }

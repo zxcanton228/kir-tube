@@ -7,6 +7,7 @@ build
 .github
 .DS_Store
 .idea
+uploads
 clo.exe
 
 .env*

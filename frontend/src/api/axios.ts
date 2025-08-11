@@ -1,8 +1,7 @@
 import type { CreateAxiosDefaults } from 'axios'
 import axios from 'axios'
-import Cookies from 'js-cookie'
-import { authService } from 'src/services/auth.service'
-import { EnumTokens } from 'src/types/auth.types'
+import authTokenService from 'src/services/auth/auth-token.service'
+import { authService } from 'src/services/auth/auth.service'
 
 import { API_URL } from 'src/constants/constants'
 
@@ -18,31 +17,42 @@ const options: CreateAxiosDefaults = {
 
 export const axiosClassic = axios.create(options)
 export const instance = axios.create(options)
+
 instance.interceptors.request.use(config => {
-	const accessToken = Cookies.get(EnumTokens.ACCESS_TOKEN)
-	if (config.headers && accessToken) config.headers.Authorization = `Bearer ${accessToken}`
+	const accessToken = authTokenService.getAccessToken()
+
+	if (config?.headers && accessToken) {
+		config.headers.Authorization = `Bearer ${accessToken}`
+	}
+
 	return config
 })
+
 instance.interceptors.response.use(
 	config => config,
 	async error => {
 		const originalRequest = error.config
+
 		if (
-			error.response.status === 401 ||
-			errorCatch(error) === 'jwt expired' ||
-			(errorCatch(error) === 'jwt must be provided' && originalRequest && !originalRequest._isRetry)
+			(error.response.status === 401 ||
+				error.response.status === 403 ||
+				errorCatch(error) === 'jwt expired' ||
+				errorCatch(error) === 'jwt must be provided') &&
+			error.config &&
+			!error.config._isRetry
 		) {
 			originalRequest._isRetry = true
+
 			try {
 				await authService.getNewTokens()
 				return instance.request(originalRequest)
 			} catch (error) {
 				if (errorCatch(error) === 'jwt expired' || errorCatch(error) === 'Refresh token not passed') {
-					authService.removeFromStorage()
-					return null
+					authTokenService.removeAccessToken()
 				}
 			}
 		}
+
 		throw error
 	}
 )

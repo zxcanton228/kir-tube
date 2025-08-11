@@ -9,7 +9,6 @@ import { SkeletonLoader } from 'ui/SkeletonLoader'
 import { Button } from 'ui/button/Button'
 import { Field } from 'ui/field/Field'
 
-import { Recaptcha } from './Recaptcha'
 import { SwitchAuth } from './SwitchAuth'
 import type { IAuthForm } from './auth-form.types'
 import { useAuthForm } from './useAuthForm'
@@ -24,7 +23,7 @@ export function Auth() {
 		formState: { errors }
 	} = useForm<IAuthForm>({ mode: 'onChange' })
 
-	const { isLoading, onSubmit, recaptchaRef } = useAuthForm(isLogin ? 'login' : 'register', reset)
+	const { isLoading, onSubmit } = useAuthForm(isLogin ? 'login' : 'register', reset)
 
 	return (
 		<div className='w-screen h-screen flex justify-center items-center'>
@@ -80,7 +79,11 @@ export function Auth() {
 									placeholder='Enter password again:'
 								/>
 							)}
-							<Recaptcha forwardRef={recaptchaRef} />
+
+							{/* <Recaptcha
+								forwardRef={recaptchaRef}
+								captchaKey={captchaKey}
+							/> */}
 						</>
 					)}
 					<div className='text-center mt-6'>

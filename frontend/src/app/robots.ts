@@ -30,8 +30,8 @@ const disallow: string[] = [
 	...Object.values(STUDIO_PAGE),
 	PAGE.HISTORY,
 	PAGE.LIKED_VIDEOS,
-	PAGE.SEARCH,
-	PAGE.PLAYLISTS,
+	PAGE.SEARCH('*'),
+	PAGE.PLAYLISTS(),
 	PAGE.SUBSCRIPTIONS
 ]
 

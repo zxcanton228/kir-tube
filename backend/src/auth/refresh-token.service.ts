@@ -9,7 +9,8 @@ export class RefreshTokenService {
 	readonly EXPIRE_DAY_REFRESH_TOKEN = 1
 	readonly REFRESH_TOKEN_NAME = 'refreshToken'
 
-	private readonly DOMAIN = () => this.configService.get<string>('DOMAIN')
+	private readonly DOMAIN = () =>
+		this.configService.get<string>('COOKIE_DOMAIN')
 	private readonly _TOKEN_SETTINGS = (
 		expires = new Date(0)
 	): CookieOptions => ({

@@ -24,22 +24,22 @@ export const Sidebar: FC<Props> = ({ toggleSidebar, isShowedSidebar }) => {
 		<aside className={'relative z-[1] p-layout border-r border-border whitespace-nowrap overflow-hidden sidebar'}>
 			<SidebarHeader toggleSidebar={toggleSidebar} />
 			<SidebarMenu
-				menu={SIDEBAR_DATA}
 				isShowedSidebar={isShowedSidebar}
+				menu={SIDEBAR_DATA}
 			/>
 			{pathname.includes(STUDIO_PAGE.HOME) && (
 				<>
 					<SidebarMenu
-						title='Studio'
 						isShowedSidebar={isShowedSidebar}
 						menu={STUDIO_SIDEBAR_DATA}
+						title='Studio'
 					/>
 					<span className='h-[1px] bg-border my-5 w-full block' />
 				</>
 			)}
 			<SidebarMenu
-				title='More from Youtube'
 				isShowedSidebar={isShowedSidebar}
+				title='More from Youtube'
 				menu={MORE_SIDEBAR_DATA}
 			/>
 			<DynamicLogout />

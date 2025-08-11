@@ -2,7 +2,7 @@
 
 import cn from 'clsx'
 import { type PropsWithChildren, useEffect, useState } from 'react'
-import { authService } from 'src/services/auth.service'
+import { authService } from 'src/services/auth/auth.service'
 
 import { Content } from './content/Content'
 import { Sidebar } from './sidebar/Sidebar'

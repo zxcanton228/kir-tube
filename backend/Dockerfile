@@ -25,8 +25,6 @@ RUN apt-get update \
 
 COPY --from=build /app/dist ./dist
 COPY --from=build /app/prisma ./prisma
-COPY --from=build /app/emails ./emails
-COPY --from=build /app/uploads ./uploads
 COPY --from=build /app/.env.production /app/package.json /app/tsconfig.json /app/tsconfig-paths-bootstrap.js /app/bun.lock ./
 
 RUN --mount=type=cache,target=/root/.bun bun install --frozen-lockfile --production

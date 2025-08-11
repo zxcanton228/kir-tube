@@ -11,5 +11,5 @@ class ChannelService {
 	public readonly toggleSubscribe = async (slug?: string | null) =>
 		await instance.patch<IChannel[]>(`${this._BASE_URL}/toggle-subscribe/${slug}`)
 }
-export const channelService = new ChannelService()
+const channelService = new ChannelService()
 export default channelService

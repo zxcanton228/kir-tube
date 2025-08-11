@@ -14,7 +14,7 @@ export interface IFullUser extends IUser {
 	watchHistory: IWatchHistory[]
 	verificationToken?: string | null
 }
-export interface IVideoLike {
+interface IVideoLike {
 	id: string
 	video: IFullVideo
 	videoId: string

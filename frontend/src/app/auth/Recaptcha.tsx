@@ -3,15 +3,17 @@ import ReCAPTCHA from 'react-google-recaptcha'
 
 import styles from './captcha.module.scss'
 
-type Props = { forwardRef: ForwardedRef<ReCAPTCHA> }
-export const Recaptcha: FC<Props> = ({ forwardRef }) => {
-	return (
+type Props = { forwardRef: ForwardedRef<ReCAPTCHA>; captchaKey: string }
+export const Recaptcha: FC<Props> = ({ forwardRef, captchaKey }) => {
+	return captchaKey ? (
 		<ReCAPTCHA
+			sitekey={captchaKey}
+			className={styles.recaptcha}
 			ref={forwardRef}
 			size='normal'
-			sitekey={process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY as string}
 			theme='light'
-			className={styles.recaptcha}
 		/>
+	) : (
+		<div>Captcha site key is invalid</div>
 	)
 }

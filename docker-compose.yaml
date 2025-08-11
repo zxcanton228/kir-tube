@@ -1,16 +1,15 @@
 name: kir-video
 services:
   backend:
-    build:
-      context: ./backend
-    env_file:
-      - path: ./backend/.env.production
+    image: kerilka/kirube-backend
     ports:
       - 4200:4200
-    depends_on:
-      - database
+    env_file:
+      - ./backend/.env.production
     volumes:
       - ./backend/uploads:/app/uploads:rw
+    depends_on:
+      - database
 
   database:
     image: postgres:alpine
@@ -21,32 +20,26 @@ services:
     volumes:
       - postgres_data:/var/lib/postgresql/data
 
-  # frontend:
-  #   # image: ${FRONTEND_IMAGE}
-  #   build:
-  #     context: ./frontend
-  #   ports:
-  #     - '3000:3000'
+  frontend:
+    image: kerilka/kirube-frontend
+    ports:
+      - '3000:3000'
+    restart: always
+    depends_on:
+      - backend
 
-  #   restart: always
-  #   env_file:
-  #     - ./frontend/.env
-  #   depends_on:
-  #     - backend
-
-  # nginx:
-  #   build:
-  #     context: ./.nginx/
-  #   restart: unless-stopped
-  #   ports:
-  #     - 80:80
-  #     - 443:443
-  #   volumes:
-  #     - ./.nginx/nginx.conf:/etc/nginx/nginx.conf
-  #     - ./.nginx/letsencrypt/:/etc/letsencrypt/
-  #   depends_on:
-  #     - frontend
-  #     - backend
-
+  nginx:
+    image: nginx:alpine
+    ports:
+      - 80:80
+      - 443:443
+    restart: always
+    volumes:
+      - ./nginx/nginx.conf:/etc/nginx/nginx.conf:ro
+      - ./certbot/www:/var/www/certbot/:ro
+  certbot:
+    image: certbot/certbot:latest
+    volumes:
+      - ./certbot/www/:/var/www/certbot/:rw
 volumes:
   postgres_data:

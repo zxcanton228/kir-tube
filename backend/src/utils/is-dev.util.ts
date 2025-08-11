@@ -1,7 +1,7 @@
 import { ConfigService } from '@nestjs/config'
-import * as dotenv from 'dotenv'
-dotenv.config()
+import 'dotenv/config'
 
+export const CLIENT_URL = process.env.CLIENT_URL
 export const isDev = (configService: ConfigService) =>
 	configService.get('NODE_ENV') === 'development'
 

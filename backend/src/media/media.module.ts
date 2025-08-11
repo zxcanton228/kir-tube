@@ -5,6 +5,8 @@ import { MediaController } from './media.controller'
 import { MediaService } from './media.service'
 import { UploadsController } from './uploads.controller'
 
+console.log(`${path}/uploads`)
+
 @Module({
 	imports: [
 		ServeStaticModule.forRoot({

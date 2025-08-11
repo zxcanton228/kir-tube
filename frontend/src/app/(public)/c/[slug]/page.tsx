@@ -24,11 +24,11 @@ export async function generateMetadata({ params }: TPageSlugProp): Promise<Metad
 		description: channel.description,
 		alternates: { canonical: PAGE.CHANNEL(channel.id) },
 		openGraph: {
-			type: 'profile',
-			title: channel.user.name,
 			description: channel.description,
+			url: PAGE.CHANNEL(channel.id),
 			images: [channel.avatarUrl],
-			url: PAGE.CHANNEL(channel.id)
+			title: channel.user.name,
+			type: 'profile'
 		}
 	}
 }
@@ -54,9 +54,9 @@ export default async function ChannelPage({ params }: TPageSlugProp) {
 							alt={channel.user.name || ''}
 							className='object-cover'
 							src={channel.bannerUrl}
-							layout='fill'
 							quality={100}
 							priority
+							fill
 						/>
 					) : (
 						<div className='bg-border w-full h-full' />

@@ -21,6 +21,7 @@ export const metadata: Metadata = {
 		absolute: SITE_NAME,
 		template: `%s | ${SITE_NAME}`
 	},
+	description: "Best youtube's alternative platform.",
 	icons: {
 		icon: '/images/logo.svg',
 		shortcut: '/images/logo.svg',
@@ -47,13 +48,12 @@ export const metadata: Metadata = {
 		]
 	},
 	metadataBase: new URL(SITE_URL),
-	applicationName: `${SITE_NAME}`,
+	applicationName: SITE_NAME,
 	authors: {
 		name: 'Kirill Vegele',
-		url: 'https://.com'
+		url: 'https://github.com/zxcanton228'
 	},
 	manifest: '/manifest.json',
-	publisher: 'Max Shushval [RED Group]',
 	formatDetection: {
 		telephone: false
 	}

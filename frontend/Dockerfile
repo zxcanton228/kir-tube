@@ -4,7 +4,7 @@ WORKDIR /app
 
 COPY package.json bun.lock ./
 
-RUN --mount=type=cache,target=/root/.bun bun install --frozen-lockfile 
+RUN bun install --frozen-lockfile 
 
 COPY . .
 
@@ -17,9 +17,9 @@ WORKDIR /app
 
 COPY --from=builder /app/.next ./.next
 COPY --from=builder /app/public ./public
-COPY --from=builder /app/package.json /app/next.config.ts /app/.env /app/bun.lock ./
+COPY --from=builder /app/package.json /app/next.config.ts /app/.env.production /app/bun.lock ./
 
-RUN --mount=type=cache,target=/root/.bun bun install --frozen-lockfile --production
+RUN bun install --frozen-lockfile --production
 
 EXPOSE 3000
 CMD ["bun", "run", "start"]

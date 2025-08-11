@@ -1,3 +1,4 @@
+import { CLIENT_URL } from '@/utils/is-dev.util'
 import {
 	Body,
 	Controller,
@@ -12,7 +13,6 @@ import {
 	UsePipes,
 	ValidationPipe
 } from '@nestjs/common'
-import { Recaptcha } from '@nestlab/google-recaptcha'
 import type { Request, Response } from 'express'
 import { AuthService } from './auth.service'
 import { AuthDto } from './dto/auth.dto'
@@ -27,7 +27,7 @@ export class AuthController {
 
 	@UsePipes(new ValidationPipe())
 	@HttpCode(200)
-	@Recaptcha()
+	// @Recaptcha()
 	@Post('auth/login')
 	async login(@Body() dto: AuthDto, @Res({ passthrough: true }) res: Response) {
 		const { refreshToken, ...response } = await this.authService.login(dto)
@@ -39,7 +39,7 @@ export class AuthController {
 
 	@UsePipes(new ValidationPipe())
 	@HttpCode(200)
-	@Recaptcha()
+	// @Recaptcha()
 	@Post('auth/register')
 	async register(
 		@Body() dto: AuthDto,
@@ -51,7 +51,7 @@ export class AuthController {
 	}
 
 	@Get('verify-email')
-	@Redirect('http://localhost:3000/verified', 302)
+	@Redirect(`${CLIENT_URL}/verified`, 302)
 	async verifyEmail(@Query('token') token?: string) {
 		if (!token) {
 			throw new UnauthorizedException('Token not passed')

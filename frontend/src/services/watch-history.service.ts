@@ -8,8 +8,16 @@ class WatchHistoryService {
 
 	public readonly getUserHistory = async (): Promise<AxiosResponse<{ video: IFullVideo }[]>> =>
 		instance.get<{ video: IFullVideo }[]>(this._BASE_URL)
-	public readonly addToHistory = async (videoId: string): Promise<AxiosResponse> =>
-		instance.post(this._BASE_URL, { videoId })
+
+	public async addToHistory(videoId: string) {
+		try {
+			const { data } = await instance.post(this._BASE_URL, { videoId })
+			return data
+		} catch {
+			return null
+		}
+	}
+
 	public readonly clearHistory = async (): Promise<AxiosResponse> => instance.delete(this._BASE_URL)
 }
 export const watchHistoryService = new WatchHistoryService()

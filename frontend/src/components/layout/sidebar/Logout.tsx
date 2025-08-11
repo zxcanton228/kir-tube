@@ -1,7 +1,7 @@
 import { useMutation } from '@tanstack/react-query'
 import { LogOut } from 'lucide-react'
 import { usePathname, useRouter } from 'next/navigation'
-import { authService } from 'src/services/auth.service'
+import { authService } from 'src/services/auth/auth.service'
 import { useTypedSelector } from 'src/store'
 
 import { PAGE } from 'src/config/public-page.config'

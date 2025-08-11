@@ -45,7 +45,7 @@ export interface IVideosPagination extends IPagination {
 	videos: IVideo[]
 }
 
-export interface ITag {
+interface ITag {
 	id: string
 	name: string
 	createdAt: Date

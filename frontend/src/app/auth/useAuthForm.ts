@@ -4,7 +4,7 @@ import { useRouter } from 'next/navigation'
 import { useRef, useTransition } from 'react'
 import ReCAPTCHA from 'react-google-recaptcha'
 import type { SubmitHandler, UseFormReset } from 'react-hook-form'
-import { authService } from 'src/services/auth.service'
+import { authService } from 'src/services/auth/auth.service'
 
 import { PAGE } from 'src/config/public-page.config'
 
@@ -16,19 +16,20 @@ export function useAuthForm(type: 'login' | 'register', reset: UseFormReset<IAut
 	const [isPending, startTransition] = useTransition()
 
 	const recaptchaRef = useRef<ReCAPTCHA>(null)
+	const captchaKey: string = process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY as string
 
 	const { mutateAsync, isPending: isAuthPending } = useMutation({
 		mutationKey: [type],
-		mutationFn: (data: IAuthData) => authService.main(type, data, recaptchaRef.current?.getValue())
+		mutationFn: (data: IAuthData) => authService.main(type, data /* recaptchaRef.current?.getValue() */)
 	})
 
 	const onSubmit: SubmitHandler<IAuthForm> = async ({ email, password }) => {
-		const token = recaptchaRef.current?.getValue()
+		// const token = recaptchaRef.current?.getValue()
 		const { toast } = await import('react-hot-toast')
-		if (!token) {
-			toast.error('Please, complete the captcha', { id: 'recaptcha' })
-			return
-		}
+		// if (!token) {
+		// 	toast.error('Please, complete the captcha', { id: 'recaptcha' })
+		// 	return
+		// }
 		toast.promise(mutateAsync({ email, password }), {
 			loading: 'Loading...',
 			success: () => {
@@ -47,5 +48,5 @@ export function useAuthForm(type: 'login' | 'register', reset: UseFormReset<IAut
 	}
 
 	const isLoading = isPending || isAuthPending
-	return { onSubmit, isLoading, recaptchaRef }
+	return { onSubmit, isLoading, recaptchaRef, captchaKey }
 }
